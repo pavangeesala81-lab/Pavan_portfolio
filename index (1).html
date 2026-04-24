@@ -1,0 +1,1478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Pavan Naga Raju — Motion Designer & Visual Storyteller</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400;1,600&family=Barlow+Condensed:wght@700;800;900&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --black: #0e0e0e;
+  --white: #FFFFFF;
+  --off: #F8F4EE;
+  --muted: #888;
+  --amber: #D4860A;
+  --border: #E8E3DA;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Barlow', sans-serif; background: var(--black); color: var(--black); overflow-x: hidden; }
+/* ── NAV ── */
+nav {
+  position: sticky; top: 0; left: 0; right: 0; z-index: 200;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.2rem 3.5rem;
+  background: rgba(255,235,150,0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(212,134,10,0.12);
+}
+.nav-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic; font-weight: 600; font-size: 1.35rem;
+  color: var(--black);
+}
+.nav-links { display: flex; gap: 2.2rem; list-style: none; }
+.nav-links a {
+  font-size: 0.85rem; font-weight: 500;
+  color: var(--black); text-decoration: none; opacity: 0.65;
+  transition: opacity 0.2s;
+}
+.nav-links a:hover, .nav-links a.active { opacity: 1; }
+.nav-cta {
+  background: var(--black); color: var(--white);
+  padding: 0.62rem 1.6rem; border-radius: 999px;
+  font-size: 0.85rem; font-weight: 600; text-decoration: none;
+  transition: opacity 0.2s, transform 0.15s;
+}
+.nav-cta:hover { opacity: 0.82; transform: translateY(-1px); }
+.nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+.nav-hamburger span { display: block; width: 24px; height: 2px; background: var(--black); border-radius: 2px; transition: all 0.3s; }
+
+/* ── HERO ── */
+.hero {
+  position: relative; width: 100%;
+  min-height: calc(100vh - 64px);
+  background: radial-gradient(ellipse 80% 70% at 50% 40%, #FFE17A 0%, #FFD580 18%, #FBBF5A 38%, #F5E8C8 62%, #F8F4EE 82%, #FFFFFF 100%);
+  overflow: hidden;
+  display: flex; flex-direction: column; justify-content: flex-end;
+}
+/* BIG ITALIC GREETING */
+.hero-greeting {
+  position: absolute;
+  top: 15%; left: 50%; transform: translateX(-50%);
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic; font-weight: 300;
+  font-size: clamp(5rem, 14vw, 13rem);
+  line-height: 1; letter-spacing: -3px;
+  color: var(--black); opacity: 0.92;
+  white-space: nowrap; pointer-events: none; z-index: 1;
+  animation: fadeIn 0.8s ease 0.1s both;
+  width: 100%; text-align: center;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 0 5%;
+}
+.hero-greeting span { display: inline-block; }
+.hero-greeting span:first-child { padding-left: 350px; }
+.hero-greeting span:last-child { padding-right: 178px; margin-bottom: -5px; }
+
+/* AVATAR AREA — decorative motion element */
+.hero-avatar-wrap {
+  position: absolute;
+  bottom: 0; left: 50%; transform: translateX(-50%);
+  height: 90%; width: auto;
+  z-index: 3;
+  display: flex; align-items: flex-end; justify-content: center;
+  animation: slideUp 0.9s ease 0.15s both;
+  pointer-events: none;
+}
+.hero-photo {
+    height: 680px;
+    width: auto;
+    object-fit: contain;
+    margin-left: -404px;
+    margin-bottom: -70px;
+    margin-top: -48px;
+}
+.hero-avatar-inner {
+  display: none;
+}
+.hero-initials {
+  display: none;
+}
+
+/* AVAILABILITY PILL */
+.avail-pill {
+  position: absolute; left: 4%; top: 50%;
+  display: flex; align-items: center; gap: 0.5rem;
+  background: var(--white); color: var(--black);
+  font-size: 0.82rem; font-weight: 500;
+  padding: 0.5rem 1rem; border-radius: 999px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  z-index: 5;
+  animation: fadeIn 0.7s ease 0.5s both;
+  white-space: nowrap;
+}
+.avail-dot { width: 8px; height: 8px; background: #F57F00; border-radius: 50%; animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.3;transform:scale(1.7)} }
+
+/* SPECIALTY TEXT */
+.hero-specialty {
+  position: absolute; right: 4%; bottom: 40%;
+  max-width: 200px; text-align: right;
+  font-size: 0.88rem; line-height: 1.7;
+  color: var(--black); opacity: 0.72; z-index: 5;
+  animation: fadeIn 0.7s ease 0.55s both;
+}
+
+/* BOTTOM NAME + ROLE */
+.hero-bottom {
+  position: relative; z-index: 4;
+  display: flex; align-items: flex-end; justify-content: space-between;
+  padding: 0 3.5rem 2.5rem; pointer-events: none;
+}
+.hero-name {
+  font-family: 'Barlow Condensed', sans-serif; font-weight: 900;
+  font-size: clamp(3.5rem, 10.5vw, 10rem);
+  line-height: 0.88; letter-spacing: -1px;
+  color: var(--black); text-transform: uppercase;
+  animation: slideUp 0.75s ease 0.2s both;
+}
+.hero-name-small {
+  font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
+  font-size: clamp(0.9rem, 2vw, 1.6rem);
+  color: var(--black); opacity: 0.6; letter-spacing: 1px;
+  text-transform: uppercase; margin-bottom: 0.3rem;
+  animation: slideUp 0.7s ease 0.22s both;
+}
+.hero-role {
+  font-family: 'Barlow Condensed', sans-serif; font-weight: 900;
+  text-transform: uppercase;
+  font-size: clamp(1.6rem, 5vw, 4.2rem);
+  line-height: 0.88; letter-spacing: -0.5px;
+  color: var(--black); text-align: right;
+  animation: slideUp 0.75s ease 0.28s both;
+}
+
+@keyframes fadeIn { from{opacity:0} to{opacity:1} }
+@keyframes slideUp { from{opacity:0;transform:translateY(40px)} to{opacity:1;transform:translateY(0)} }
+
+/* ── TICKER ── */
+.ticker-bar {
+  background: var(--black); overflow: hidden;
+  height: 48px; display: flex; align-items: center;
+}
+.ticker-track {
+  display: flex; gap: 3rem; width: max-content;
+  animation: tick 24s linear infinite; white-space: nowrap; padding: 0 1.5rem;
+}
+.ti {
+  font-size: 0.75rem; font-weight: 600; letter-spacing: 1.5px;
+  text-transform: uppercase; color: rgba(255,255,255,0.5);
+  display: flex; align-items: center; gap: 0.8rem;
+}
+.ti::before { content: '◆'; font-size: 0.35rem; color: #F0B84A; }
+@keyframes tick { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+/* ── ABOUT ── */
+.about-section {
+  background: var(--white);
+  display: grid; grid-template-columns: 1fr 1.5fr;
+  padding: 6rem 3.5rem; gap: 5rem; align-items: center;
+  border-bottom: 1px solid var(--border);
+}
+.about-label {
+  font-size: 0.7rem; font-weight: 600; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--amber); margin-bottom: 1.2rem;
+  display: flex; align-items: center; gap: 0.6rem;
+}
+.about-label::before { content: ''; width: 20px; height: 1px; background: var(--amber); }
+.about-h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.4rem, 5vw, 4.5rem);
+  font-weight: 300; line-height: 1.05; letter-spacing: -1.5px;
+  color: var(--black); margin-bottom: 1.5rem;
+}
+.about-h2 em { font-style: italic; }
+.about-p { font-size: 0.9rem; color: var(--muted); line-height: 1.85; margin-bottom: 1rem; }
+.about-p strong { color: var(--black); }
+.about-stats { display: flex; gap: 2.5rem; margin-top: 2rem; flex-wrap: wrap; }
+.a-stat-num {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 2.8rem; font-weight: 900; color: var(--black);
+  line-height: 1; letter-spacing: -1px;
+}
+.a-stat-lbl { font-size: 0.72rem; color: var(--muted); font-weight: 500; margin-top: 3px; }
+.awards-stack { display: flex; flex-direction: column; gap: 1rem; }
+.award-row {
+  display: flex; align-items: center; gap: 1.2rem;
+  padding: 1.2rem 1.4rem; border: 1px solid var(--border); border-radius: 16px;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.award-row:hover { box-shadow: 0 8px 28px rgba(0,0,0,0.06); transform: translateY(-2px); }
+.award-icon-wrap {
+  width: 44px; height: 44px; border-radius: 12px;
+  background: #FEF3DC; display: flex; align-items: center;
+  justify-content: center; font-size: 1.3rem; flex-shrink: 0;
+}
+.award-title { font-size: 0.88rem; font-weight: 700; color: var(--black); }
+.award-org { font-size: 0.73rem; color: var(--amber); font-weight: 500; margin-top: 2px; }
+.tools-wrap { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.5rem; }
+.tool-chip {
+  font-size: 0.76rem; font-weight: 500; color: var(--muted);
+  border: 1px solid var(--border); border-radius: 999px;
+  padding: 0.3rem 0.85rem; transition: color 0.2s, border-color 0.2s;
+}
+.tool-chip:hover { color: var(--black); border-color: var(--black); }
+
+/* ── SERVICES ── */
+.services-section { padding: 6rem 3.5rem; background: var(--off); border-bottom: 1px solid var(--border); }
+.sec-head {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  margin-bottom: 3rem; gap: 2rem; flex-wrap: wrap;
+}
+.sec-h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.2rem, 4vw, 3.8rem);
+  font-weight: 300; line-height: 1; letter-spacing: -1.5px; color: var(--black);
+}
+.sec-h2 em { font-style: italic; }
+.sec-sub { font-size: 0.88rem; color: var(--muted); line-height: 1.7; max-width: 340px; }
+.svc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); }
+.svc-card {
+  background: var(--white); padding: 2.5rem 2rem 2rem;
+  transition: background 0.25s; cursor: default;
+}
+.svc-card:hover { background: var(--black); }
+.svc-card:hover .svc-name, .svc-card:hover .svc-num { color: var(--white); }
+.svc-card:hover .svc-desc { color: rgba(255,255,255,0.5); }
+.svc-num {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 3rem; font-weight: 900; color: var(--border);
+  line-height: 1; letter-spacing: -1px; margin-bottom: 1.4rem;
+  transition: color 0.25s;
+}
+.svc-ic { font-size: 2rem; display: block; margin-bottom: 0.8rem; }
+.svc-name {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.2rem; font-weight: 800; text-transform: uppercase;
+  letter-spacing: 1px; color: var(--black); margin-bottom: 0.6rem;
+  transition: color 0.25s;
+}
+.svc-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.7; transition: color 0.25s; }
+
+/* ── EXPERIENCE ── */
+.exp-section { background: var(--white); padding: 6rem 3.5rem; border-bottom: 1px solid var(--border); }
+.exp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; margin-top: 3rem; }
+.exp-list { display: flex; flex-direction: column; }
+.exp-item {
+  display: grid; grid-template-columns: 100px 1fr;
+  gap: 1.5rem; padding: 1.4rem 0; border-bottom: 1px solid var(--border);
+  transition: padding-left 0.2s;
+}
+.exp-item:last-child { border-bottom: none; }
+.exp-item:hover { padding-left: 0.5rem; }
+.exp-yr { font-size: 0.72rem; color: var(--muted); line-height: 1.6; padding-top: 3px; }
+.exp-co { font-size: 0.68rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--amber); margin-bottom: 3px; }
+.exp-ro { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; font-weight: 600; color: var(--black); margin-bottom: 4px; }
+.exp-de { font-size: 0.79rem; color: var(--muted); line-height: 1.65; }
+.edu-card {
+  background: #FEF3DC; border-radius: 20px;
+  padding: 2.5rem; border: 1px solid rgba(212,134,10,0.15); height: fit-content;
+}
+.edu-label { font-size: 0.68rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--amber); margin-bottom: 1.2rem; }
+.edu-title { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 300; font-style: italic; color: var(--black); line-height: 1.1; margin-bottom: 1.8rem; }
+.edu-item { padding: 1rem 0; border-bottom: 1px solid rgba(212,134,10,0.12); }
+.edu-item:last-child { border-bottom: none; }
+.edu-deg { font-size: 0.85rem; font-weight: 600; color: var(--black); }
+.edu-sch { font-size: 0.76rem; color: var(--amber); font-weight: 500; margin-top: 3px; }
+.edu-yr { font-size: 0.7rem; color: var(--muted); margin-top: 2px; }
+
+/* ── TESTIMONIAL ── */
+.testi-section { background: var(--black); padding: 7rem 3.5rem; }
+.testi-inner { max-width: 900px; margin: 0 auto; text-align: center; }
+.testi-qmark { font-family: 'Cormorant Garamond', serif; font-size: 8rem; font-style: italic; font-weight: 300; color: var(--amber); opacity: 0.35; line-height: 0.5; display: block; margin-bottom: 0.5rem; }
+.testi-quote { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.3rem, 2.8vw, 2.4rem); font-style: italic; font-weight: 300; color: var(--white); line-height: 1.5; margin-bottom: 2.5rem; }
+.testi-by { display: flex; align-items: center; justify-content: center; gap: 1rem; }
+.testi-av { width: 46px; height: 46px; border-radius: 12px; background: rgba(255,255,255,0.06); display: flex; align-items: center; justify-content: center; font-size: 1.3rem; }
+.testi-name { font-size: 0.85rem; font-weight: 700; color: var(--white); }
+.testi-role-lbl { font-size: 0.72rem; color: rgba(255,255,255,0.4); margin-top: 1px; }
+
+/* ── CTA ── */
+.cta-section { background: var(--off); padding: 7rem 3.5rem; border-top: 1px solid var(--border); }
+.cta-inner { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 5rem; align-items: center; }
+.cta-h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.8rem, 6vw, 5.5rem); font-weight: 300; line-height: 1.0; letter-spacing: -2px; color: var(--black); }
+.cta-h2 em { font-style: italic; }
+.cta-sub { font-size: 0.88rem; color: var(--muted); line-height: 1.75; margin-top: 1.5rem; }
+.cta-right { display: flex; flex-direction: column; gap: 1rem; }
+.cta-link-row {
+  display: flex; align-items: center; gap: 0.9rem;
+  padding: 1.2rem 1.5rem; background: var(--white);
+  border-radius: 16px; border: 1px solid var(--border);
+  text-decoration: none; color: var(--black);
+  transition: box-shadow 0.2s, transform 0.15s;
+}
+.cta-link-row:hover { box-shadow: 0 8px 28px rgba(0,0,0,0.08); transform: translateY(-2px); }
+.cta-link-icon { font-size: 1.2rem; flex-shrink: 0; }
+.cta-link-label { font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; color: var(--muted); margin-bottom: 1px; }
+.cta-link-val { font-size: 0.81rem; font-weight: 600; color: var(--black); word-break: break-all; }
+.btn-big {
+  display: inline-flex; align-items: center; gap: 0.7rem;
+  background: var(--black); color: var(--white);
+  padding: 1rem 2rem; border-radius: 999px;
+  font-size: 0.88rem; font-weight: 700; text-decoration: none;
+  margin-top: 1.5rem; width: fit-content;
+  transition: opacity 0.2s, transform 0.15s;
+}
+.btn-big:hover { opacity: 0.82; transform: translateY(-2px); }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--black); padding: 2rem 3.5rem;
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
+}
+.f-logo { font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 600; font-size: 1.2rem; color: var(--white); }
+.f-copy { font-size: 0.73rem; color: rgba(255,255,255,0.35); }
+.f-links { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+.f-links a { font-size: 0.76rem; color: rgba(255,255,255,0.4); text-decoration: none; transition: color 0.2s; }
+.f-links a:hover { color: var(--white); }
+
+/* REVEAL */
+.reveal { opacity: 0; transform: translateY(26px); transition: opacity 0.65s ease, transform 0.65s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ═══════════════════════════════════════
+   MOBILE RESPONSIVE — max 768px
+═══════════════════════════════════════ */
+@media (max-width: 768px) {
+
+  /* NAV */
+  nav { padding: 1rem 1.5rem; }
+  .nav-links { display: none; flex-direction: column; gap: 0; position: absolute; top: 100%; left: 0; right: 0; background: var(--white); border-bottom: 1px solid var(--border); padding: 0.5rem 0; z-index: 200; }
+  .nav-links.open { display: flex; }
+  .nav-links a { padding: 0.9rem 1.5rem; border-bottom: 1px solid var(--border); opacity: 1; font-size: 0.95rem; }
+  .nav-links li:last-child a { border-bottom: none; }
+  .nav-cta { display: none; }
+  .nav-hamburger { display: flex; }
+
+  /* HERO */
+  .hero { min-height: 100svh; justify-content: flex-end; }
+  .hero-greeting {
+    font-size: clamp(3.5rem, 18vw, 6rem);
+    top: 20%; padding: 0 4%;
+    flex-direction: column; gap: 0; text-align: center;
+    justify-content: center; align-items: center;
+    letter-spacing: -1px;
+  }
+  .hero-avatar-wrap { height: 70%; }
+  .avail-pill { left: 50%; top: auto; bottom: 42%; transform: translateX(-50%); font-size: 0.75rem; white-space: nowrap; }
+  .hero-specialty { display: none; }
+  .hero-bottom {
+    flex-direction: column; align-items: flex-start;
+    padding: 0 1.5rem 2rem; gap: 0.5rem;
+  }
+  .hero-name { font-size: clamp(3rem, 16vw, 6rem); }
+  .hero-name-small { font-size: 0.85rem; }
+  .hero-role { font-size: clamp(1.4rem, 8vw, 3rem); text-align: left; }
+
+  /* ABOUT */
+  .about-section { grid-template-columns: 1fr; padding: 3.5rem 1.5rem; gap: 2.5rem; }
+  .about-h2 { font-size: clamp(2rem, 8vw, 3rem); }
+  .about-stats { gap: 1.5rem; }
+
+  /* SERVICES */
+  .services-section { padding: 3.5rem 1.5rem; }
+  .sec-head { flex-direction: column; align-items: flex-start; gap: 0.8rem; margin-bottom: 2rem; }
+  .svc-grid { grid-template-columns: 1fr; }
+  .svc-card { padding: 1.8rem 1.5rem; }
+
+  /* EXPERIENCE */
+  .exp-section { padding: 3.5rem 1.5rem; }
+  .exp-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  .exp-item { grid-template-columns: 80px 1fr; gap: 1rem; }
+
+  /* TESTIMONIAL */
+  .testi-section { padding: 4rem 1.5rem; }
+  .testi-qmark { font-size: 5rem; }
+  .testi-quote { font-size: clamp(1.1rem, 5vw, 1.5rem); }
+
+  /* CTA */
+  .cta-section { padding: 4rem 1.5rem; }
+  .cta-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+  .cta-h2 { font-size: clamp(2.5rem, 10vw, 4rem); }
+  .cta-link-val { font-size: 0.73rem; }
+
+  /* FOOTER */
+  footer { padding: 1.8rem 1.5rem; flex-direction: column; align-items: flex-start; gap: 0.8rem; }
+  .f-links { gap: 1rem; }
+}
+
+/* ═══════════════════════════════════════
+   TABLET — 769px to 1024px
+═══════════════════════════════════════ */
+@media (min-width: 769px) and (max-width: 1024px) {
+
+  nav { padding: 1.5rem 2rem; }
+  .nav-links { gap: 1.4rem; }
+
+  .hero-greeting { font-size: clamp(5rem, 10vw, 8rem); }
+  .hero-avatar-wrap { height: 80%; }
+  .hero-bottom { padding: 0 2rem 2rem; }
+  .hero-name { font-size: clamp(3rem, 9vw, 7rem); }
+
+  .about-section { padding: 4rem 2rem; gap: 3rem; }
+  .services-section { padding: 4rem 2rem; }
+  .svc-grid { grid-template-columns: repeat(2, 1fr); }
+
+  .exp-section { padding: 4rem 2rem; }
+  .exp-grid { gap: 2.5rem; }
+
+  .testi-section { padding: 5rem 2rem; }
+  .cta-section { padding: 5rem 2rem; }
+  .cta-inner { gap: 3rem; }
+
+  footer { padding: 2rem 2rem; }
+}
+
+/* ── WORKS PAGE STYLES ── */
+:root {
+  --black: #0e0e0e;
+  --white: #FFFFFF;
+  --off: #F8F4EE;
+  --muted: #888;
+  --amber: #D4860A;
+  --amber-bg: #FEF3DC;
+  --border: #E8E3DA;
+  --teal: #1A6E63;
+  --teal-bg: #E0F0EE;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Barlow', sans-serif; background: var(--off); color: var(--black); overflow-x: hidden; }
+
+/* ── NAV ── */
+nav {
+  position: sticky; top: 0; z-index: 200;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.2rem 3.5rem;
+  background: rgba(248,244,238,0.92);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic; font-weight: 600; font-size: 1.35rem; color: var(--black);
+  text-decoration: none;
+}
+.nav-links { display: flex; gap: 2.2rem; list-style: none; }
+.nav-links a {
+  font-size: 0.85rem; font-weight: 500; color: var(--black);
+  text-decoration: none; opacity: 0.55; transition: opacity 0.2s;
+}
+.nav-links a:hover, .nav-links a.active { opacity: 1; }
+.nav-cta {
+  background: var(--black); color: var(--white);
+  padding: 0.62rem 1.6rem; border-radius: 999px;
+  font-size: 0.85rem; font-weight: 600; text-decoration: none;
+  transition: opacity 0.2s, transform 0.15s;
+}
+.nav-cta:hover { opacity: 0.82; transform: translateY(-1px); }
+.nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+.nav-hamburger span { display: block; width: 24px; height: 2px; background: var(--black); border-radius: 2px; }
+
+/* ── PAGE HERO ── */
+.page-hero {
+  background: var(--black);
+  padding: 6rem 3.5rem 5rem;
+  position: relative; overflow: hidden;
+}
+.page-hero::before {
+  content: 'WORKS';
+  position: absolute; right: -2rem; top: 50%; transform: translateY(-50%);
+  font-family: 'Barlow Condensed', sans-serif; font-weight: 900;
+  font-size: clamp(8rem, 18vw, 16rem); letter-spacing: -3px;
+  color: rgba(255,255,255,0.03); pointer-events: none; white-space: nowrap;
+  line-height: 1;
+}
+.page-hero-eyebrow {
+  font-size: 0.72rem; font-weight: 600; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--amber);
+  display: flex; align-items: center; gap: 0.7rem;
+  margin-bottom: 1.2rem; animation: up 0.5s ease both;
+}
+.page-hero-eyebrow::before { content: ''; width: 24px; height: 1px; background: var(--amber); }
+.page-hero h1 {
+  font-family: 'Barlow Condensed', sans-serif; font-weight: 900;
+  font-size: clamp(3.5rem, 8vw, 7.5rem);
+  line-height: 0.9; letter-spacing: -2px; text-transform: uppercase;
+  color: var(--white); animation: up 0.6s ease 0.08s both;
+}
+.page-hero h1 em {
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-weight: 300; color: var(--amber); letter-spacing: 0; text-transform: none;
+}
+.page-hero-sub {
+  font-size: 0.92rem; color: rgba(255,255,255,0.5); line-height: 1.75;
+  max-width: 520px; margin-top: 1.5rem;
+  animation: up 0.6s ease 0.16s both;
+}
+.hero-stats-row {
+  display: flex; gap: 3rem; margin-top: 3rem; flex-wrap: wrap;
+  animation: up 0.6s ease 0.24s both;
+}
+.hs-num {
+  font-family: 'Barlow Condensed', sans-serif; font-weight: 900;
+  font-size: 2.8rem; color: var(--white); line-height: 1; letter-spacing: -1px;
+}
+.hs-num span { color: var(--amber); }
+.hs-lbl { font-size: 0.7rem; color: rgba(255,255,255,0.4); letter-spacing: 1px; text-transform: uppercase; margin-top: 3px; }
+
+/* ── TICKER ── */
+.ticker-bar {
+  background: var(--amber); overflow: hidden;
+  height: 44px; display: flex; align-items: center;
+}
+.ticker-track {
+  display: flex; gap: 3rem; width: max-content;
+  animation: tick 20s linear infinite; white-space: nowrap; padding: 0 1.5rem;
+}
+.ti {
+  font-size: 0.72rem; font-weight: 700; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--black);
+  display: flex; align-items: center; gap: 0.8rem;
+}
+.ti::before { content: '◆'; font-size: 0.35rem; }
+@keyframes tick { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+/* ── SECTION WRAPPER ── */
+.section { padding: 5rem 3.5rem; }
+.section-label {
+  font-size: 0.7rem; font-weight: 700; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--amber);
+  display: flex; align-items: center; gap: 0.7rem; margin-bottom: 0.8rem;
+}
+.section-label::before { content: ''; width: 20px; height: 1px; background: var(--amber); }
+.section-h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.2rem, 4vw, 3.5rem);
+  font-weight: 300; line-height: 1; letter-spacing: -1.5px; color: var(--black);
+  margin-bottom: 3rem;
+}
+.section-h2 em { font-style: italic; }
+
+/* ── PROJECTS GRID ── */
+.projects-bg { background: var(--white); border-bottom: 1px solid var(--border); }
+.projects-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 1.2rem;
+}
+
+/* Featured project — full width */
+.proj-card {
+  background: var(--off); border: 1px solid var(--border);
+  border-radius: 20px; overflow: hidden;
+  transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+  display: flex; flex-direction: column;
+}
+.proj-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.08);
+  border-color: rgba(212,134,10,0.35);
+}
+.proj-card.featured {
+  grid-column: span 3;
+  display: grid; grid-template-columns: 1fr 1fr;
+}
+.proj-thumb {
+  aspect-ratio: 16/9; display: flex; align-items: center;
+  justify-content: center; font-size: 4rem;
+  position: relative; overflow: hidden;
+}
+.proj-card.featured .proj-thumb { aspect-ratio: auto; min-height: 260px; }
+.proj-thumb-icon {
+  position: relative; z-index: 2;
+  filter: drop-shadow(0 8px 20px rgba(0,0,0,0.15));
+}
+.proj-body { padding: 1.8rem 2rem; display: flex; flex-direction: column; flex: 1; }
+.proj-card.featured .proj-body { padding: 2.5rem; justify-content: center; }
+.proj-meta {
+  display: flex; align-items: center; gap: 0.7rem;
+  margin-bottom: 0.8rem; flex-wrap: wrap;
+}
+.proj-cat {
+  font-size: 0.65rem; font-weight: 700; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--amber);
+}
+.proj-year {
+  font-size: 0.65rem; font-weight: 600; color: var(--muted);
+  background: var(--border); padding: 0.18rem 0.55rem; border-radius: 999px;
+}
+.proj-client {
+  font-size: 0.68rem; font-weight: 600; color: var(--teal);
+  letter-spacing: 0.5px;
+}
+.proj-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.35rem; font-weight: 600; color: var(--black);
+  line-height: 1.2; letter-spacing: -0.3px; margin-bottom: 0.7rem;
+}
+.proj-card.featured .proj-name { font-size: 1.9rem; }
+.proj-desc { font-size: 0.81rem; color: var(--muted); line-height: 1.7; flex: 1; }
+.proj-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1rem; }
+.ptag {
+  font-size: 0.67rem; font-weight: 600; letter-spacing: 0.5px;
+  background: var(--white); color: var(--black);
+  border: 1px solid var(--border); border-radius: 999px;
+  padding: 0.22rem 0.65rem; transition: background 0.2s, border-color 0.2s;
+}
+.proj-card:hover .ptag { border-color: rgba(212,134,10,0.3); }
+
+/* Thumb gradient backgrounds */
+.g1 { background: linear-gradient(135deg, #e8f4f0, #b8ddd5); }
+.g2 { background: linear-gradient(135deg, #fff3dc, #ffd980); }
+.g3 { background: linear-gradient(135deg, #e8e8f8, #c8c8f0); }
+.g4 { background: linear-gradient(135deg, #f0e8e8, #e0c0c0); }
+.g5 { background: linear-gradient(135deg, #e8f0e8, #b8d8b8); }
+.g6 { background: linear-gradient(135deg, #1a1a2a, #2a2a4a); }
+
+/* ── ACHIEVEMENTS ── */
+.achievements-bg { background: var(--off); border-bottom: 1px solid var(--border); }
+.ach-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+
+.ach-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: 20px; padding: 2rem;
+  display: flex; gap: 1.2rem; align-items: flex-start;
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+}
+.ach-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.06);
+  border-color: rgba(212,134,10,0.3);
+}
+.ach-card.dark {
+  background: var(--black); border-color: rgba(255,255,255,0.06);
+}
+.ach-card.dark .ach-title { color: var(--white); }
+.ach-card.dark .ach-desc { color: rgba(255,255,255,0.5); }
+.ach-icon {
+  width: 46px; height: 46px; border-radius: 12px;
+  background: var(--amber-bg); display: flex; align-items: center;
+  justify-content: center; font-size: 1.4rem; flex-shrink: 0;
+}
+.ach-card.dark .ach-icon { background: rgba(212,134,10,0.15); }
+.ach-title { font-size: 0.92rem; font-weight: 700; color: var(--black); margin-bottom: 0.4rem; line-height: 1.3; }
+.ach-desc { font-size: 0.8rem; color: var(--muted); line-height: 1.65; }
+
+/* ── HIGHLIGHTS ── */
+.highlights-bg { background: var(--black); }
+.highlights-bg .section-label { color: var(--amber); }
+.highlights-bg .section-h2 { color: var(--white); }
+.hl-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: rgba(255,255,255,0.06); }
+.hl-card {
+  background: var(--black); padding: 2.2rem 1.8rem;
+  transition: background 0.25s;
+}
+.hl-card:hover { background: #1a1a1a; }
+.hl-num {
+  font-family: 'Barlow Condensed', sans-serif; font-weight: 900;
+  font-size: 3rem; letter-spacing: -1px; line-height: 1;
+  color: var(--amber); margin-bottom: 0.6rem;
+}
+.hl-title { font-size: 0.88rem; font-weight: 600; color: var(--white); margin-bottom: 0.4rem; }
+.hl-desc { font-size: 0.78rem; color: rgba(255,255,255,0.4); line-height: 1.6; }
+
+/* ── PIPELINE ── */
+.pipeline-bg { background: var(--white); border-bottom: 1px solid var(--border); }
+.pipeline-steps {
+  display: grid; grid-template-columns: repeat(5, 1fr);
+  gap: 0; position: relative;
+}
+.pipeline-steps::before {
+  content: ''; position: absolute;
+  top: 32px; left: 10%; right: 10%; height: 1px;
+  background: linear-gradient(to right, transparent, var(--amber), transparent);
+}
+.pipeline-step { padding: 0 1.5rem 1.5rem; text-align: center; position: relative; }
+.step-circle {
+  width: 64px; height: 64px; border-radius: 50%;
+  background: var(--amber-bg); border: 2px solid var(--amber);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.5rem; margin: 0 auto 1rem;
+  position: relative; z-index: 2;
+  transition: background 0.2s, transform 0.2s;
+}
+.pipeline-step:hover .step-circle { background: var(--amber); transform: scale(1.1); }
+.step-num {
+  position: absolute; top: -6px; right: -6px;
+  width: 20px; height: 20px; border-radius: 50%;
+  background: var(--black); color: var(--white);
+  font-size: 0.6rem; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+}
+.step-title { font-size: 0.82rem; font-weight: 700; color: var(--black); margin-bottom: 0.3rem; }
+.step-desc { font-size: 0.73rem; color: var(--muted); line-height: 1.5; }
+
+/* ── PORTFOLIO LINKS ── */
+.links-bg { background: var(--amber); }
+.links-inner {
+  display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem;
+}
+.link-card {
+  background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 18px; padding: 1.8rem 2rem;
+  text-decoration: none; color: var(--white);
+  display: flex; align-items: center; gap: 1.2rem;
+  transition: background 0.2s, transform 0.15s;
+}
+.link-card:hover { background: rgba(255,255,255,0.25); transform: translateY(-3px); }
+.link-icon { font-size: 2rem; flex-shrink: 0; }
+.link-label { font-size: 0.68rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.65); margin-bottom: 3px; }
+.link-val { font-size: 0.85rem; font-weight: 600; color: var(--white); }
+
+/* ── BACK TO PORTFOLIO ── */
+.back-section {
+  background: var(--black); padding: 4rem 3.5rem;
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem;
+}
+.back-text h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.8rem, 3.5vw, 3rem); font-weight: 300; font-style: italic;
+  color: var(--white); line-height: 1.1;
+}
+.back-text p { font-size: 0.85rem; color: rgba(255,255,255,0.4); margin-top: 0.5rem; }
+.btn-back {
+  background: var(--amber); color: var(--black);
+  padding: 0.9rem 2.2rem; border-radius: 999px;
+  font-size: 0.88rem; font-weight: 700; text-decoration: none;
+  transition: opacity 0.2s, transform 0.15s; white-space: nowrap;
+}
+.btn-back:hover { opacity: 0.88; transform: translateY(-2px); }
+
+/* FOOTER */
+footer {
+  background: #080808; padding: 1.8rem 3.5rem;
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+.f-logo { font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 600; font-size: 1.1rem; color: var(--white); }
+.f-copy { font-size: 0.73rem; color: rgba(255,255,255,0.25); }
+.f-links { display: flex; gap: 1.5rem; }
+.f-links a { font-size: 0.76rem; color: rgba(255,255,255,0.35); text-decoration: none; transition: color 0.2s; }
+.f-links a:hover { color: var(--white); }
+
+/* REVEAL */
+.reveal { opacity: 0; transform: translateY(26px); transition: opacity 0.65s ease, transform 0.65s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+@keyframes up { from{opacity:0;transform:translateY(22px)} to{opacity:1;transform:translateY(0)} }
+
+/* ── MOBILE ── */
+@media (max-width: 768px) {
+  nav { padding: 1rem 1.5rem; }
+  .nav-links { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: var(--white); border-bottom: 1px solid var(--border); padding: 0.5rem 0; z-index: 200; }
+  .nav-links.open { display: flex; }
+  .nav-links a { padding: 0.9rem 1.5rem; border-bottom: 1px solid var(--border); opacity: 1; }
+  .nav-cta { display: none; }
+  .nav-hamburger { display: flex; }
+
+  .page-hero { padding: 4rem 1.5rem 3rem; }
+  .hero-stats-row { gap: 1.5rem; }
+
+  .section { padding: 3.5rem 1.5rem; }
+
+  .projects-grid { grid-template-columns: 1fr; }
+  .proj-card.featured { grid-column: span 1; grid-template-columns: 1fr; }
+  .proj-card.featured .proj-thumb { min-height: 200px; }
+
+  .ach-grid { grid-template-columns: 1fr; }
+
+  .hl-grid { grid-template-columns: repeat(2, 1fr); }
+
+  .pipeline-steps { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .pipeline-steps::before { display: none; }
+
+  .links-inner { grid-template-columns: 1fr; }
+
+  .back-section { padding: 3rem 1.5rem; flex-direction: column; align-items: flex-start; }
+  footer { padding: 1.5rem; flex-direction: column; align-items: flex-start; }
+}
+
+/* ── TABLET ── */
+@media (min-width: 769px) and (max-width: 1024px) {
+  nav { padding: 1.2rem 2rem; }
+  .page-hero { padding: 5rem 2rem 4rem; }
+  .section { padding: 4rem 2rem; }
+  .projects-grid { grid-template-columns: repeat(2, 1fr); }
+  .proj-card.featured { grid-column: span 2; }
+  .hl-grid { grid-template-columns: repeat(2, 1fr); }
+  .pipeline-steps { grid-template-columns: repeat(3, 1fr); }
+  .links-inner { grid-template-columns: 1fr; }
+  .back-section { padding: 4rem 2rem; }
+  footer { padding: 1.8rem 2rem; }
+}
+
+/* ── PAGE SWITCHER ── */
+.page-portfolio { display: block; }
+.page-works { display: none; }
+.page-works.active { display: block; }
+.page-portfolio.active { display: block; }
+body.on-works .page-portfolio { display: none; }
+body.on-works .page-works { display: block; }
+</style>
+</head>
+<body>
+
+<!-- ── UNIFIED NAV ── -->
+<nav id="nav-bar">
+  <a href="#" class="nav-logo" onclick="showPage('portfolio'); return false;">Pavan.</a>
+  <ul class="nav-links" id="navMenu">
+    <li><a href="#home" onclick="showPage('portfolio')">Home</a></li>
+    <li><a href="#about" onclick="showPage('portfolio')">About</a></li>
+    <li><a href="#services" onclick="showPage('portfolio')">Services</a></li>
+    <li><a href="#experience" onclick="showPage('portfolio')">Experience</a></li>
+    <li><a href="#" id="works-nav-link" onclick="showPage('works'); return false;">Works</a></li>
+    <li><a href="#contact" onclick="showPage('portfolio')">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta" onclick="showPage('portfolio')">Contact</a>
+  <div class="nav-hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- ── PORTFOLIO PAGE ── -->
+<div class="page-portfolio" id="page-portfolio">
+<!-- HERO -->
+<section class="hero" id="home">
+
+  <div class="hero-greeting">
+    <span>Hey,</span>
+    <span>there</span>
+  </div>
+
+  <div class="hero-avatar-wrap">
+    <img src="DSC01552 copy.png" class="hero-photo" alt="Pavan Naga Raju" />
+  </div>
+
+  <div class="avail-pill">
+    <span class="avail-dot"></span>
+    Available for new opportunities
+  </div>
+
+  <div class="hero-specialty">
+    Specialised in Motion Graphics,<br>
+    VFX, Video Editing, and<br>
+    Gen AI-Powered Storytelling.
+  </div>
+
+  <div class="hero-bottom">
+    <div>
+      <div class="hero-name-small">I AM</div>
+      <div class="hero-name">PAVAN<br>NAGA RAJU</div>
+    </div>
+    <div class="hero-role">MOTION<br>GRAPHICS<br>DESIGNER</div>
+  </div>
+
+</section>
+
+<!-- TICKER -->
+<div class="ticker-bar">
+  <div class="ticker-track">
+    <span class="ti">After Effects</span><span class="ti">Premiere Pro</span>
+    <span class="ti">DaVinci Resolve</span><span class="ti">Google Veo 3</span>
+    <span class="ti">Kling AI</span><span class="ti">HeyGen</span>
+    <span class="ti">Photoshop</span><span class="ti">Illustrator</span>
+    <span class="ti">VFX & Compositing</span><span class="ti">Color Grading</span>
+    <span class="ti">Higgsfield AI</span><span class="ti">Cinematography</span>
+    <span class="ti">After Effects</span><span class="ti">Premiere Pro</span>
+    <span class="ti">DaVinci Resolve</span><span class="ti">Google Veo 3</span>
+    <span class="ti">Kling AI</span><span class="ti">HeyGen</span>
+    <span class="ti">Photoshop</span><span class="ti">Illustrator</span>
+    <span class="ti">VFX & Compositing</span><span class="ti">Color Grading</span>
+    <span class="ti">Higgsfield AI</span><span class="ti">Cinematography</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="about-section" id="about">
+  <div class="reveal">
+    <div class="about-label">About Me</div>
+    <h2 class="about-h2">Motion Graphics<br>Designer &<br><em>AI-Powered Visual Storyteller</em></h2>
+    <p class="about-p">With a <strong>BSc in Animation</strong> (Cinematography & Film/Video Production) from Adikavi Nannaya University, I bring academic depth and real industry experience across healthcare, ed-tech, and consulting.</p>
+    <p class="about-p">Currently <strong>Sr. Motion Graphics Designer at Ealkay Consulting</strong> — recognised for Best Client Satisfaction. Also awarded Best Creative Thinking Mind at Ekluvya.</p>
+    <div class="about-stats">
+      <div><div class="a-stat-num">5+</div><div class="a-stat-lbl">Years Active</div></div>
+      <div><div class="a-stat-num">50+</div><div class="a-stat-lbl">Projects Done</div></div>
+      <div><div class="a-stat-num">5</div><div class="a-stat-lbl">Companies</div></div>
+    </div>
+    <div class="tools-wrap">
+      <span class="tool-chip">After Effects</span>
+      <span class="tool-chip">Premiere Pro</span>
+      <span class="tool-chip">DaVinci Resolve</span>
+      <span class="tool-chip">Google Veo 3</span>
+      <span class="tool-chip">Kling AI</span>
+      <span class="tool-chip">HeyGen</span>
+      <span class="tool-chip">Photoshop</span>
+      <span class="tool-chip">Illustrator</span>
+      <span class="tool-chip">Higgsfield AI</span>
+    </div>
+  </div>
+  <div class="reveal">
+    <div class="awards-stack">
+      <div class="award-row">
+        <div class="award-icon-wrap">🏆</div>
+        <div><div class="award-title">Best Client Satisfaction</div><div class="award-org">Ealkay Consulting</div></div>
+      </div>
+      <div class="award-row">
+        <div class="award-icon-wrap">💡</div>
+        <div><div class="award-title">Best Creative Thinking Mind</div><div class="award-org">Ekluvya</div></div>
+      </div>
+      <div class="award-row">
+        <div class="award-icon-wrap">🤖</div>
+        <div><div class="award-title">Gen AI Video Pioneer</div><div class="award-org">Veo 3 · Kling · HeyGen</div></div>
+      </div>
+      <div class="award-row">
+        <div class="award-icon-wrap">🎓</div>
+        <div><div class="award-title">B.Sc. Animation & Computers</div><div class="award-org">Aditya College, Kakinada · 2018–2021</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services-section" id="services">
+  <div class="sec-head reveal">
+    <h2 class="sec-h2">What I <em>Do</em></h2>
+    <p class="sec-sub">End-to-end creative production — from concept to final export. Technical precision and artistic vision in every project.</p>
+  </div>
+  <div class="svc-grid">
+    <div class="svc-card reveal">
+      <div class="svc-num">01</div><span class="svc-ic">🎬</span>
+      <div class="svc-name">Motion Graphics</div>
+      <p class="svc-desc">Animated logos, title sequences, explainer videos, and kinetic typography — designed to captivate from frame one.</p>
+    </div>
+    <div class="svc-card reveal">
+      <div class="svc-num">02</div><span class="svc-ic">🎞</span>
+      <div class="svc-name">Video Editing</div>
+      <p class="svc-desc">Color grading, multi-cam edits, audio sync, and narrative-driven cuts for ads, films, and social content.</p>
+    </div>
+    <div class="svc-card reveal">
+      <div class="svc-num">03</div><span class="svc-ic">✨</span>
+      <div class="svc-name">VFX & Animation</div>
+      <p class="svc-desc">Visual effects compositing, 2D/3D animation, and particle simulations that add real dimension.</p>
+    </div>
+    <div class="svc-card reveal">
+      <div class="svc-num">04</div><span class="svc-ic">🤖</span>
+      <div class="svc-name">Gen AI Storytelling</div>
+      <p class="svc-desc">AI-generated video campaigns using Veo 3, Kling, and HeyGen — the new frontier of content creation.</p>
+    </div>
+    <div class="svc-card reveal">
+      <div class="svc-num">05</div><span class="svc-ic">📸</span>
+      <div class="svc-name">Cinematography</div>
+      <p class="svc-desc">On-location shoots, directorial vision, and camera operation for corporate films and brand narratives.</p>
+    </div>
+    <div class="svc-card reveal">
+      <div class="svc-num">06</div><span class="svc-ic">📱</span>
+      <div class="svc-name">Digital Content</div>
+      <p class="svc-desc">Platform-optimised videos for YouTube, Instagram Reels, and LinkedIn — scroll-stopping by design.</p>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="exp-section" id="experience">
+  <h2 class="sec-h2 reveal">Career <em>Timeline</em></h2>
+  <div class="exp-grid">
+    <div class="exp-list reveal">
+      <div class="exp-item">
+        <div class="exp-yr">Dec 2025<br>Present</div>
+        <div><div class="exp-co">Ealkay Consulting · Hyderabad</div><div class="exp-ro">Sr. Motion Graphics Designer</div><div class="exp-de">Leading MG production for client campaigns. Recognised for best client satisfaction.</div></div>
+      </div>
+      <div class="exp-item">
+        <div class="exp-yr">Oct 2023<br>Dec 2025</div>
+        <div><div class="exp-co">Ekluvya · Hyderabad</div><div class="exp-ro">Motion Graphic Designer</div><div class="exp-de">Motion graphics & promo videos for a BYJU'S-style e-learning platform. Awarded best creative mind.</div></div>
+      </div>
+      <div class="exp-item">
+        <div class="exp-yr">Aug 2022<br>Oct 2023</div>
+        <div><div class="exp-co">Malla Reddy Narayana Hospital</div><div class="exp-ro">Video Editor & MG Designer</div><div class="exp-de">YouTube & Instagram ad campaigns for a leading Hyderabad hospital brand.</div></div>
+      </div>
+      <div class="exp-item">
+        <div class="exp-yr">Oct 2021<br>Sep 2022</div>
+        <div><div class="exp-co">Medicover Hospitals · Hyderabad</div><div class="exp-ro">Cinematographer & Video Editor</div><div class="exp-de">Corporate films, influencer videos, and animated content for a pan-India healthcare group.</div></div>
+      </div>
+      <div class="exp-item">
+        <div class="exp-yr">Jul 2021<br>Dec 2021</div>
+        <div><div class="exp-co">Tutorac Inc · Hyderabad</div><div class="exp-ro">Cinematographer & Video Editor</div><div class="exp-de">Video production for an ed-tech platform's courses and promotional content.</div></div>
+      </div>
+    </div>
+    <div class="edu-card reveal">
+      <div class="edu-label">Education</div>
+      <div class="edu-title">Academic<br>Background</div>
+      <div class="edu-item">
+        <div class="edu-deg">B.Sc. Animation & Computers</div>
+        <div class="edu-sch">Aditya College</div>
+        <div class="edu-yr">📅 08/2018 – 05/2021 &nbsp;·&nbsp; 📍 Kakinada, Andhra Pradesh</div>
+      </div>
+      <div class="edu-item">
+        <div class="edu-deg">Board of Intermediate</div>
+        <div class="edu-sch">Pragati Junior College</div>
+        <div class="edu-yr">📅 06/2015 – 05/2017 &nbsp;·&nbsp; 📍 Kakinada, Andhra Pradesh</div>
+      </div>
+      <div class="edu-item">
+        <div class="edu-deg">Secondary School Education</div>
+        <div class="edu-sch">Z.P.H. School</div>
+        <div class="edu-yr">📅 06/2014 – 05/2015</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIAL -->
+<section class="testi-section" id="testimonial">
+  <div class="testi-inner reveal">
+    <span class="testi-qmark">"</span>
+    <p class="testi-quote">Pavan has an exceptional eye for motion design. His work is not only visually stunning but also perfectly aligned with our brand message. Every project he touches feels alive, purposeful, and highly professional.</p>
+    <div class="testi-by">
+      <div class="testi-av">👤</div>
+      <div>
+        <div class="testi-name">Creative Director</div>
+        <div class="testi-role-lbl">Medicover Hospitals</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA / CONTACT -->
+<section class="cta-section" id="contact">
+  <div class="cta-inner">
+    <div class="reveal">
+      <h2 class="cta-h2">Let's create<br>something<br><em>unforgettable</em></h2>
+      <p class="cta-sub">Open to freelance projects, full-time creative roles, and collaborations. Based in Hyderabad — working with teams worldwide.</p>
+      <a href="mailto:pavangeesala81@gmail.com" class="btn-big">Get In Touch →</a>
+    </div>
+    <div class="cta-right reveal">
+      <a href="mailto:pavangeesala81@gmail.com" class="cta-link-row">
+        <span class="cta-link-icon">✉</span>
+        <div><div class="cta-link-label">Email</div><div class="cta-link-val">pavangeesala81@gmail.com</div></div>
+      </a>
+      <a href="https://www.linkedin.com/in/pavan-geesala/" target="_blank" class="cta-link-row">
+        <span class="cta-link-icon">in</span>
+        <div><div class="cta-link-label">LinkedIn</div><div class="cta-link-val">linkedin.com/in/pavan-geesala/</div></div>
+      </a>
+      <a href="https://www.behance.net/pavannagraj" target="_blank" class="cta-link-row">
+        <span class="cta-link-icon">🎨</span>
+        <div><div class="cta-link-label">Behance</div><div class="cta-link-val">behance.net/pavannagraj</div></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+  <!-- FOOTER -->
+  <footer>
+    <div class="f-logo">Pavan.</div>
+    <span class="f-copy">© 2026 Pavan Naga Raju — All Rights Reserved.</span>
+    <nav class="f-links">
+      <a href="#home" onclick="showPage('portfolio')">Home</a>
+      <a href="#about" onclick="showPage('portfolio')">About</a>
+      <a href="#services" onclick="showPage('portfolio')">Services</a>
+      <a href="#experience" onclick="showPage('portfolio')">Experience</a>
+      <a href="#" onclick="showPage('works'); return false;">Works</a>
+      <a href="#contact" onclick="showPage('portfolio')">Contact</a>
+    </nav>
+  </footer>
+</div>
+
+<!-- ── WORKS PAGE ── -->
+<div class="page-works" id="page-works">
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="page-hero-eyebrow">Portfolio & Achievements</div>
+  <h1>My Works &<br><em>Achievements</em></h1>
+  <p class="page-hero-sub">A curated collection of motion graphics, AI-powered video productions, explainer films, and brand storytelling projects across healthcare, industrial, and corporate sectors.</p>
+  <div class="hero-stats-row">
+    <div class="hs"><div class="hs-num">6<span>+</span></div><div class="hs-lbl">Featured Projects</div></div>
+    <div class="hs"><div class="hs-num">10<span>+</span></div><div class="hs-lbl">Total Deliveries</div></div>
+    <div class="hs"><div class="hs-num">5<span>+</span></div><div class="hs-lbl">Industries Served</div></div>
+    <div class="hs"><div class="hs-num">5<span>+</span></div><div class="hs-lbl">Years Experience</div></div>
+  </div>
+</div>
+
+<!-- TICKER -->
+<div class="ticker-bar">
+  <div class="ticker-track">
+    <span class="ti">Motion Graphics</span><span class="ti">AI Video</span>
+    <span class="ti">Explainer Films</span><span class="ti">Brand Storytelling</span>
+    <span class="ti">Corporate Videos</span><span class="ti">VFX & Compositing</span>
+    <span class="ti">Healthcare</span><span class="ti">Industrial</span>
+    <span class="ti">Architecture</span><span class="ti">Tech Visualization</span>
+    <span class="ti">Motion Graphics</span><span class="ti">AI Video</span>
+    <span class="ti">Explainer Films</span><span class="ti">Brand Storytelling</span>
+    <span class="ti">Corporate Videos</span><span class="ti">VFX & Compositing</span>
+    <span class="ti">Healthcare</span><span class="ti">Industrial</span>
+    <span class="ti">Architecture</span><span class="ti">Tech Visualization</span>
+  </div>
+</div>
+
+<!-- PROJECTS -->
+<section class="projects-bg section" id="projects">
+  <div class="section-label reveal">Selected Works</div>
+  <h2 class="section-h2 reveal">Featured <em>Projects</em></h2>
+  <div class="projects-grid">
+
+    <!-- Featured -->
+    <div class="proj-card featured reveal">
+      <div class="proj-thumb g1">
+        <span class="proj-thumb-icon" style="font-size:6rem;">🏥</span>
+      </div>
+      <div class="proj-body">
+        <div class="proj-meta">
+          <span class="proj-cat">Motion Graphics · Video Editing · AI Visuals</span>
+          <span class="proj-year">2025–2026</span>
+        </div>
+        <div class="proj-client">Pristino — Healthcare Hygiene Solutions</div>
+        <div class="proj-name">Pristino Brand Visual Content System</div>
+        <p class="proj-desc">Developed high-quality visual content including product showcase videos, workplace visuals, and brand storytelling assets. Focused on realistic lighting, industrial environment accuracy, and brand-consistent design language. Created multiple AI-assisted visuals aligned with real factory settings and uniform branding standards.</p>
+        <div class="proj-tags">
+          <span class="ptag">Motion Graphics</span>
+          <span class="ptag">Video Editing</span>
+          <span class="ptag">AI Visuals</span>
+          <span class="ptag">Brand Storytelling</span>
+          <span class="ptag">Realistic Lighting</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="proj-card reveal">
+      <div class="proj-thumb g2">
+        <span class="proj-thumb-icon">🏭</span>
+      </div>
+      <div class="proj-body">
+        <div class="proj-meta">
+          <span class="proj-cat">Motion Graphics · Explainer · AI Video</span>
+          <span class="proj-year">2026</span>
+        </div>
+        <div class="proj-client">Norikool</div>
+        <div class="proj-name">Norikool Industrial Cooling Explainer</div>
+        <p class="proj-desc">High-impact explainer video highlighting industrial heat problems and Norikool's passive cooling solution. Handled complete pipeline: script visualization, scene design, AI-assisted visuals, and cinematic editing with realistic lighting.</p>
+        <div class="proj-tags">
+          <span class="ptag">Explainer Video</span>
+          <span class="ptag">AI Video</span>
+          <span class="ptag">Industrial</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="proj-card reveal">
+      <div class="proj-thumb g3">
+        <span class="proj-thumb-icon">🏗️</span>
+      </div>
+      <div class="proj-body">
+        <div class="proj-meta">
+          <span class="proj-cat">Motion Graphics · Corporate Video</span>
+          <span class="proj-year">2026</span>
+        </div>
+        <div class="proj-client">Skyshade — B2B Engineering & Design</div>
+        <div class="proj-name">Skyshade Architectural Solutions Visuals</div>
+        <p class="proj-desc">Professional B2B visual content for daylighting systems, tensile structures, and building facades. Focused on clean, engineering-driven storytelling to match architectural audiences and corporate positioning.</p>
+        <div class="proj-tags">
+          <span class="ptag">Corporate Video</span>
+          <span class="ptag">B2B</span>
+          <span class="ptag">Architecture</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 4 -->
+    <div class="proj-card reveal">
+      <div class="proj-thumb g4">
+        <span class="proj-thumb-icon">📡</span>
+      </div>
+      <div class="proj-body">
+        <div class="proj-meta">
+          <span class="proj-cat">Motion Graphics · Tech Visualization</span>
+          <span class="proj-year">2026</span>
+        </div>
+        <div class="proj-client">Akshara Consultants</div>
+        <div class="proj-name">Garment Management System Explainer</div>
+        <p class="proj-desc">Detailed system workflow video explaining RFID-based garment tracking. Visualized fixed RFID readers, handheld Zebra scanners, and textile tag integration with clear step-by-step motion graphics.</p>
+        <div class="proj-tags">
+          <span class="ptag">RFID Visualization</span>
+          <span class="ptag">Tech Explainer</span>
+          <span class="ptag">Workflow Video</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 5 -->
+    <div class="proj-card reveal">
+      <div class="proj-thumb g5">
+        <span class="proj-thumb-icon">🏠</span>
+      </div>
+      <div class="proj-body">
+        <div class="proj-meta">
+          <span class="proj-cat">AI Video · Video Editing · Marketing</span>
+          <span class="proj-year">2025</span>
+        </div>
+        <div class="proj-client">Freelance / Personal Branding</div>
+        <div class="proj-name">Real Estate Marketing Video (AI-Based)</div>
+        <p class="proj-desc">30-second high-conversion real estate video using AI-generated visuals and professional voiceover. Optimized for digital platforms (16:9 & 9:16) with engaging pacing and clean storytelling.</p>
+        <div class="proj-tags">
+          <span class="ptag">AI Video</span>
+          <span class="ptag">Real Estate</span>
+          <span class="ptag">Multi-Format</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 6 -->
+    <div class="proj-card reveal">
+      <div class="proj-thumb g6">
+        <span class="proj-thumb-icon">🎞️</span>
+      </div>
+      <div class="proj-body">
+        <div class="proj-meta">
+          <span class="proj-cat">Cinematography · Editing · Storytelling</span>
+          <span class="proj-year">2026</span>
+        </div>
+        <div class="proj-client">Personal Project</div>
+        <div class="proj-name">Self Documentary — "The Work No One Sees"</div>
+        <p class="proj-desc">Directed and edited a short documentary highlighting unseen daily work processes. Focused on emotional storytelling, real-life visuals, and strong narrative pacing.</p>
+        <div class="proj-tags">
+          <span class="ptag">Documentary</span>
+          <span class="ptag">Cinematography</span>
+          <span class="ptag">Storytelling</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PRODUCTION PIPELINE -->
+<section class="pipeline-bg section" id="pipeline">
+  <div class="section-label reveal">My Process</div>
+  <h2 class="section-h2 reveal">End-to-End <em>Production Pipeline</em></h2>
+  <div class="pipeline-steps reveal">
+    <div class="pipeline-step">
+      <div class="step-circle">
+        📋
+        <div class="step-num">1</div>
+      </div>
+      <div class="step-title">Script & Concept</div>
+      <p class="step-desc">Brief analysis, script visualization, and creative direction planning</p>
+    </div>
+    <div class="pipeline-step">
+      <div class="step-circle">
+        🎨
+        <div class="step-num">2</div>
+      </div>
+      <div class="step-title">Scene Design</div>
+      <p class="step-desc">Visual design, storyboard, layout, and AI-assisted asset generation</p>
+    </div>
+    <div class="pipeline-step">
+      <div class="step-circle">
+        🎬
+        <div class="step-num">3</div>
+      </div>
+      <div class="step-title">Motion & Animation</div>
+      <p class="step-desc">After Effects, motion graphics production, and VFX compositing</p>
+    </div>
+    <div class="pipeline-step">
+      <div class="step-circle">
+        🎞
+        <div class="step-num">4</div>
+      </div>
+      <div class="step-title">Editing & Grade</div>
+      <p class="step-desc">DaVinci Resolve color, audio sync, and narrative-driven editing</p>
+    </div>
+    <div class="pipeline-step">
+      <div class="step-circle">
+        🚀
+        <div class="step-num">5</div>
+      </div>
+      <div class="step-title">Final Delivery</div>
+      <p class="step-desc">Multi-format export optimised for broadcast, digital, and social</p>
+    </div>
+  </div>
+</section>
+
+<!-- ACHIEVEMENTS -->
+<section class="achievements-bg section" id="achievements">
+  <div class="section-label reveal">Recognition & Impact</div>
+  <h2 class="section-h2 reveal">Achievements &<br><em>Notable Highlights</em></h2>
+  <div class="ach-grid">
+    <div class="ach-card reveal">
+      <div class="ach-icon">🏆</div>
+      <div>
+        <div class="ach-title">Best Client Satisfaction</div>
+        <div class="ach-desc">Recognised by Ealkay Consulting for delivering exceptional client experiences and outstanding project outcomes consistently.</div>
+      </div>
+    </div>
+    <div class="ach-card reveal">
+      <div class="ach-icon">💡</div>
+      <div>
+        <div class="ach-title">Best Creative Thinking Mind</div>
+        <div class="ach-desc">Awarded at Ekluvya for bringing the most innovative and original creative ideas to the production team.</div>
+      </div>
+    </div>
+    <div class="ach-card reveal">
+      <div class="ach-icon">🤖</div>
+      <div>
+        <div class="ach-title">AI-Integrated Production Workflow</div>
+        <div class="ach-desc">Specialised in AI-assisted video production using Veo 3, Kling, and HeyGen — improving speed, quality, and scalability for clients.</div>
+      </div>
+    </div>
+    <div class="ach-card reveal">
+      <div class="ach-icon">🏭</div>
+      <div>
+        <div class="ach-title">B2B Industrial Video Expert</div>
+        <div class="ach-desc">Successfully delivered multiple industrial and B2B video projects for brands like Pristino, Norikool, and Skyshade with realistic lighting and accurate environments.</div>
+      </div>
+    </div>
+    <div class="ach-card reveal">
+      <div class="ach-icon">📡</div>
+      <div>
+        <div class="ach-title">Technical System Visualization</div>
+        <div class="ach-desc">Created high-impact explainer videos for complex technical systems — RFID garment tracking, industrial cooling, and architectural solutions.</div>
+      </div>
+    </div>
+    <div class="ach-card dark reveal">
+      <div class="ach-icon">🎯</div>
+      <div>
+        <div class="ach-title">Brand Visual Pipeline Development</div>
+        <div class="ach-desc">Developed consistent brand visual pipelines for industrial and healthcare clients, ensuring design language accuracy across all content types.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HIGHLIGHTS -->
+<section class="highlights-bg section">
+  <div class="section-label reveal">By The Numbers</div>
+  <h2 class="section-h2 reveal">Notable <em>Highlights</em></h2>
+  <div class="hl-grid reveal">
+    <div class="hl-card">
+      <div class="hl-num">10+</div>
+      <div class="hl-title">Professional Video Projects</div>
+      <div class="hl-desc">Delivered across healthcare, industrial, and architecture sectors</div>
+    </div>
+    <div class="hl-card">
+      <div class="hl-num">5+</div>
+      <div class="hl-title">Industries Covered</div>
+      <div class="hl-desc">Healthcare, industrial, architecture, ed-tech, and real estate</div>
+    </div>
+    <div class="hl-card">
+      <div class="hl-num">3</div>
+      <div class="hl-title">AI Tools Mastered</div>
+      <div class="hl-desc">Google Veo 3, Kling AI, and HeyGen in active production use</div>
+    </div>
+    <div class="hl-card">
+      <div class="hl-num">100%</div>
+      <div class="hl-title">End-to-End Production</div>
+      <div class="hl-desc">Script → visualization → editing → final delivery, handled solo</div>
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO LINKS -->
+<section class="links-bg section" id="links">
+  <div class="section-label reveal" style="color:rgba(0,0,0,0.5);">View My Work</div>
+  <h2 class="section-h2 reveal" style="color:var(--black);margin-bottom:2rem;">Portfolio <em style="color:rgba(0,0,0,0.6);">Links</em></h2>
+  <div class="links-inner reveal">
+    <a href="https://www.behance.net/pavannagraj" target="_blank" class="link-card">
+      <span class="link-icon">🎨</span>
+      <div><div class="link-label">Behance Portfolio</div><div class="link-val">behance.net/pavannagraj</div></div>
+    </a>
+    <a href="https://www.linkedin.com/in/pavan-geesala/" target="_blank" class="link-card">
+      <span class="link-icon">in</span>
+      <div><div class="link-label">LinkedIn Profile</div><div class="link-val">linkedin.com/in/pavan-geesala/</div></div>
+    </a>
+    <a href="mailto:pavangeesala81@gmail.com" class="link-card">
+      <span class="link-icon">✉</span>
+      <div><div class="link-label">Email Me</div><div class="link-val">pavangeesala81@gmail.com</div></div>
+    </a>
+  </div>
+</section>
+
+<!-- BACK -->
+<div class="back-section">
+  <div class="back-text">
+    <h3>Want to work together?</h3>
+    <p>Let's create something truly unforgettable.</p>
+  </div>
+  <a href="pavan_portfolio_new.html#contact" class="btn-back">Go to Portfolio →</a>
+</div>
+
+<!-- FOOTER -->
+  <!-- BACK + FOOTER -->
+  <div class="back-section">
+    <div class="back-text">
+      <h3>Want to work together?</h3>
+      <p>Let's create something truly unforgettable.</p>
+    </div>
+    <a href="#" class="btn-back" onclick="showPage('portfolio'); return false;">← Back to Portfolio</a>
+  </div>
+  <footer>
+    <div class="f-logo">Pavan.</div>
+    <span class="f-copy">© 2026 Pavan Naga Raju — All Rights Reserved.</span>
+    <nav class="f-links">
+      <a href="#" onclick="showPage('portfolio'); return false;">Home</a>
+      <a href="#projects">Works</a>
+      <a href="#achievements">Achievements</a>
+      <a href="#" onclick="showPage('portfolio'); return false;">Contact</a>
+    </nav>
+  </footer>
+</div>
+
+<script>
+// ── PAGE SWITCHER ──
+function showPage(page) {
+  window.scrollTo(0, 0);
+  if (page === 'works') {
+    document.body.classList.add('on-works');
+    document.getElementById('works-nav-link').classList.add('active');
+  } else {
+    document.body.classList.remove('on-works');
+    document.getElementById('works-nav-link').classList.remove('active');
+  }
+  document.getElementById('navMenu').classList.remove('open');
+}
+
+// Check URL hash on load
+window.addEventListener('DOMContentLoaded', () => {
+  if (window.location.hash === '#works') showPage('works');
+});
+
+// ── HAMBURGER ──
+function toggleMenu() {
+  document.getElementById('navMenu').classList.toggle('open');
+}
+document.querySelectorAll('.nav-links a').forEach(a => {
+  a.addEventListener('click', () => document.getElementById('navMenu').classList.remove('open'));
+});
+
+// ── SCROLL REVEAL ──
+const obs = new IntersectionObserver(entries => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) setTimeout(() => e.target.classList.add('visible'), i * 70);
+  });
+}, { threshold: 0.07 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+// ── ACTIVE NAV ──
+const secs = document.querySelectorAll('[id]');
+const links = document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll', () => {
+  if (document.body.classList.contains('on-works')) return;
+  let cur = '';
+  secs.forEach(s => { if (window.scrollY >= s.offsetTop - 120) cur = s.id; });
+  links.forEach(a => {
+    if (a.id === 'works-nav-link') return;
+    a.classList.toggle('active', a.getAttribute('href') === '#' + cur);
+  });
+});
+</script>
+</body>
+</html>
