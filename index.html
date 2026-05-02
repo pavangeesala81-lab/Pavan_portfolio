@@ -424,9 +424,15 @@ footer {
 
   /* CTA */
   .cta-section { padding: 4rem 1.5rem; }
-  .cta-inner { grid-template-columns: 1fr; gap: 2.5rem; }
-  .cta-h2 { font-size: clamp(2.5rem, 10vw, 4rem); }
-  .cta-link-val { font-size: 0.73rem; }
+  .cta-inner { grid-template-columns: 1fr; gap: 2.5rem; align-items: stretch; }
+  .cta-right { gap: 1rem; }
+  .cta-link-row {
+    width: 100%;
+    min-width: 0;
+    padding: 1.1rem 1.5rem;
+  }
+  .cta-link-val { font-size: 0.76rem; }
+  .btn-big { width: 100%; justify-content: center; }
 
   /* FOOTER */
   footer { padding: 1.8rem 1.5rem; flex-direction: column; align-items: flex-start; gap: 0.8rem; }
