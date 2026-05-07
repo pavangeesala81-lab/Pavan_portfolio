@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
-<meta name="google-site-verification" content="FnaexCgvyOzym1dh4r6VRX1ccIc3ERJCEUxHAkf8SBk" />
-<title>Pavan Geesala | Motion Graphics Designer in Hyderabad | Premium Video Editor for Brands</title>
-<meta name="description" content="Pavan Geesala is a Motion Designer and Video Editor based in Hyderabad, specializing in visual storytelling, explainer videos, motion graphics, and premium brand content." />
+<meta name="google-site-verification" content="qvw9LXG902KnnAI_kv__ByFNrE7zeANPfkP_LTcjiFw" />
+<title>Pavan Geesala | Motion Graphics Designer in Hyderabad | Video Editor</title>
+<meta name="description" content="Pavan Geesala is a Motion Graphics Designer in Hyderabad specializing in motion graphics, video editing, AI-generated visuals, and premium brand content for businesses and agencies." />
 <meta name="keywords" content="Motion Designer Hyderabad, Video Editor Hyderabad, Meta Ads Manager Hyderabad, Facebook Ads Expert India, Instagram Ads Specialist, Digital Marketing Hyderabad" />
 <meta name="author" content="Pavan Geesala" />
 <meta property="og:title" content="Pavan Geesala | Motion Designer & Video Editor" />
@@ -82,6 +82,17 @@ nav {
   background: radial-gradient(ellipse 80% 70% at 50% 40%, #FFE17A 0%, #FFD580 18%, #FBBF5A 38%, #F5E8C8 62%, #F8F4EE 82%, #FFFFFF 100%);
   overflow: hidden;
   display: flex; flex-direction: column; justify-content: flex-end;
+}
+.seo-heading {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
 }
 /* BIG ITALIC GREETING */
 .hero-greeting {
@@ -251,6 +262,70 @@ nav {
 }
 .tool-chip:hover { color: var(--black); border-color: var(--black); }
 
+/* ── WHY WORK WITH ME ── */
+.why-section {
+  background: var(--off);
+  padding: 6rem 3.5rem;
+  border-bottom: 1px solid var(--border);
+}
+.why-inner {
+  max-width: 1180px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 2.5rem;
+  align-items: start;
+}
+.why-label {
+  font-size: 0.72rem; font-weight: 700; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--amber); margin-bottom: 1rem;
+  display: inline-flex; align-items: center; gap: 0.7rem;
+}
+.why-label::before { content: ''; width: 24px; height: 1px; background: var(--amber); }
+.why-h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.4rem, 4vw, 4rem);
+  font-weight: 300; line-height: 1.05; letter-spacing: -1.25px;
+  color: var(--black);
+  margin: 0;
+}
+.why-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+.why-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 2rem;
+  min-height: 170px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.why-card:hover { transform: translateY(-4px); box-shadow: 0 22px 50px rgba(0,0,0,0.08); }
+.why-icon {
+  width: 44px; height: 44px; border-radius: 16px;
+  display: grid; place-items: center;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900; font-size: 1rem;
+  color: var(--amber);
+  background: rgba(212,134,10,0.14);
+}
+.why-card h3 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.05rem; font-weight: 800;
+  color: var(--black);
+  margin: 0;
+  letter-spacing: 0.5px;
+}
+.why-card p {
+  font-size: 0.9rem; color: var(--muted); line-height: 1.8;
+  margin: 0;
+}
+
 /* ── SERVICES ── */
 .services-section { padding: 6rem 3.5rem; background: var(--off); border-bottom: 1px solid var(--border); }
 .sec-head {
@@ -405,6 +480,12 @@ footer {
   .about-section { grid-template-columns: 1fr; padding: 3.5rem 1.5rem; gap: 2.5rem; }
   .about-h2 { font-size: clamp(2rem, 8vw, 3rem); }
   .about-stats { gap: 1.5rem; }
+
+  /* WHY WORK WITH ME */
+  .why-section { padding: 3.5rem 1.5rem; }
+  .why-list { grid-template-columns: 1fr; }
+  .why-card { padding: 1.5rem; }
+  .why-h2 { font-size: clamp(1.9rem, 8vw, 2.6rem); }
 
   /* SERVICES */
   .services-section { padding: 3.5rem 1.5rem; }
@@ -875,6 +956,7 @@ body.on-works .page-works { display: block; }
 <div class="page-portfolio" id="page-portfolio">
 <!-- HERO -->
 <section class="hero" id="home">
+  <h1 class="seo-heading">Motion Graphics Designer in Hyderabad</h1>
 
   <div class="hero-greeting">
     <span>Hey,</span>
@@ -882,7 +964,7 @@ body.on-works .page-works { display: block; }
   </div>
 
   <div class="hero-avatar-wrap">
-    <img src="DSC01552 copy.png" class="hero-photo" alt="Pavan Naga Raju" />
+    <img src="Pavan Geesala.png" class="hero-photo" alt="Pavan Naga Raju" />
   </div>
 
   <div class="avail-pill">
@@ -929,8 +1011,10 @@ body.on-works .page-works { display: block; }
   <div class="reveal">
     <div class="about-label">About Me</div>
     <h2 class="about-h2">Motion Graphics<br>Designer &<br><em>AI-Powered Visual Storyteller</em></h2>
+    <p class="about-p"><strong>Motion Graphics Designer based in Hyderabad</strong> working with brands across India.</p>
     <p class="about-p">With a <strong>BSc in Animation</strong> (Cinematography & Film/Video Production) from Adikavi Nannaya University, I bring academic depth and real industry experience across healthcare, ed-tech, and consulting.</p>
     <p class="about-p">Currently <strong>Sr. Motion Graphics Designer at Ealkay Consulting</strong> — recognised for Best Client Satisfaction. Also awarded Best Creative Thinking Mind at Ekluvya.</p>
+    <p class="about-p">Helping brands grow using creative content + paid advertising strategy.</p>
     <div class="about-stats">
       <div><div class="a-stat-num">5+</div><div class="a-stat-lbl">Years Active</div></div>
       <div><div class="a-stat-num">50+</div><div class="a-stat-lbl">Projects Done</div></div>
@@ -966,6 +1050,38 @@ body.on-works .page-works { display: block; }
         <div class="award-icon-wrap">🎓</div>
         <div><div class="award-title">B.Sc. Animation & Computers</div><div class="award-org">Aditya College, Kakinada · 2018–2021</div></div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY WORK WITH ME -->
+<section class="why-section reveal" id="why">
+  <div class="why-inner">
+    <div>
+      <div class="why-label">Why Work With Me</div>
+      <h2 class="why-h2">Strategy-first, performance-focused, premium visuals delivered fast.</h2>
+    </div>
+    <div class="why-list">
+      <article class="why-card">
+        <div class="why-icon">1</div>
+        <h3>Strategy-first approach</h3>
+        <p>Every video starts with an audience-led concept and a clear conversion outcome, not just motion for motion's sake.</p>
+      </article>
+      <article class="why-card">
+        <div class="why-icon">2</div>
+        <h3>Performance-focused editing</h3>
+        <p>Structure, pacing, and visual hierarchy are tuned for clicks, watch time, and campaign ROI on every platform.</p>
+      </article>
+      <article class="why-card">
+        <div class="why-icon">3</div>
+        <h3>Clean, premium visual style</h3>
+        <p>Polished branding, elegant motion, and premium production values that elevate your message and mirror your brand identity.</p>
+      </article>
+      <article class="why-card">
+        <div class="why-icon">4</div>
+        <h3>Fast turnaround</h3>
+        <p>Efficient production systems and clear milestones keep your project moving quickly without sacrificing quality.</p>
+      </article>
     </div>
   </div>
 </section>
@@ -1108,7 +1224,7 @@ body.on-works .page-works { display: block; }
   <footer>
     <div class="f-logo">Pavan.</div>
     <span class="f-copy">© 2026 Pavan Naga Raju — All Rights Reserved.</span>
-    <p class="f-geo">Motion Graphics Designer in Hyderabad, India</p>
+    <p class="f-geo">Based in Hyderabad, India — Motion Graphics & Video Editing Services</p>
     <nav class="f-links">
       <a href="#home" onclick="showPage('portfolio')">Home</a>
       <a href="#about" onclick="showPage('portfolio')">About</a>
@@ -1455,6 +1571,7 @@ body.on-works .page-works { display: block; }
   <footer>
     <div class="f-logo">Pavan.</div>
     <span class="f-copy">© 2026 Pavan Naga Raju — All Rights Reserved.</span>
+    <p class="f-geo">Based in Hyderabad, India — Motion Graphics & Video Editing Services</p>
     <nav class="f-links">
       <a href="#" onclick="showPage('portfolio'); return false;">Home</a>
       <a href="#projects">Works</a>
