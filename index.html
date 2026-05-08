@@ -434,9 +434,14 @@ footer {
   display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
 }
 .f-logo { font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 600; font-size: 1.2rem; color: var(--white); }
-.f-copy { font-size: 0.73rem; color: rgba(255,255,255,0.35); }
-.f-links { display: flex; gap: 1.5rem; flex-wrap: wrap; }
-.f-links a { font-size: 0.76rem; color: rgba(255,255,255,0.4); text-decoration: none; transition: color 0.2s; }
+.f-copy,
+.f-geo { font-size: 0.73rem; color: rgba(255,255,255,0.72); }
+.f-links {
+  position: static; padding: 0; background: transparent; border: 0;
+  backdrop-filter: none; -webkit-backdrop-filter: none;
+  display: flex; gap: 1.5rem; flex-wrap: wrap;
+}
+.f-links a { font-size: 0.76rem; color: rgba(255,255,255,0.78); text-decoration: none; transition: color 0.2s; }
 .f-links a:hover { color: var(--white); }
 
 /* REVEAL */
@@ -870,9 +875,14 @@ footer {
   border-top: 1px solid rgba(255,255,255,0.05);
 }
 .f-logo { font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 600; font-size: 1.1rem; color: var(--white); }
-.f-copy { font-size: 0.73rem; color: rgba(255,255,255,0.25); }
-.f-links { display: flex; gap: 1.5rem; }
-.f-links a { font-size: 0.76rem; color: rgba(255,255,255,0.35); text-decoration: none; transition: color 0.2s; }
+.f-copy,
+.f-geo { font-size: 0.73rem; color: rgba(255,255,255,0.72); }
+.f-links {
+  position: static; padding: 0; background: transparent; border: 0;
+  backdrop-filter: none; -webkit-backdrop-filter: none;
+  display: flex; gap: 1.5rem; flex-wrap: wrap;
+}
+.f-links a { font-size: 0.76rem; color: rgba(255,255,255,0.78); text-decoration: none; transition: color 0.2s; }
 .f-links a:hover { color: var(--white); }
 
 /* REVEAL */
