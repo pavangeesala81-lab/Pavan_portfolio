@@ -15,7 +15,7 @@ let animationFrameId = null;
 // Generate image filename
 function getFrameFilename(index) {
   const frameNum = String(index).padStart(3, '0');
-  return `ezgif-frame-${frameNum}.jpg`;
+  return `assets/frames/ezgif-frame-${frameNum}.jpg`;
 }
 
 // Preload all frames
