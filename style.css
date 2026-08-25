@@ -220,10 +220,9 @@ html, body {
 
 .sub-section-tag {
   font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-  color: rgba(255, 255, 255, 0.65);
-  text-transform: none;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #ff7043;
 }
 
 /* Glass Panel Component */
@@ -521,7 +520,6 @@ html, body {
 .trusted-label {
   font-size: 13px;
   font-weight: 700;
-  text-transform: uppercase;
   letter-spacing: 0.06em;
   color: rgba(255, 255, 255, 0.65);
   line-height: 1.4;
