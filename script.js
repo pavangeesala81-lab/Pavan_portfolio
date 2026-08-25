@@ -1,59 +1,98 @@
 const TOTAL_FRAMES = 240;
+const CRITICAL_FRAMES = 10; // Load initial 10 frames to start instantly
 const canvas = document.getElementById('hero-canvas');
-const ctx = canvas.getContext('2d');
+const ctx = canvas ? canvas.getContext('2d') : null;
 const loader = document.getElementById('loader');
 const progressBar = document.getElementById('progress-bar');
 const progressText = document.getElementById('progress-text');
 
-const images = [];
+const images = new Array(TOTAL_FRAMES);
 let loadedCount = 0;
 let currentFrame = 0;
 let targetFrame = 0;
 let lastRenderedFrame = -1;
-let animationFrameId = null;
 
 // Generate image filename
 function getFrameFilename(index) {
   const frameNum = String(index).padStart(3, '0');
-  return `assets/frames/ezgif-frame-${frameNum}.jpg`;
+  return `assets/frames/ezgif-frame-${frameNum}.webp`;
 }
 
-// Preload all frames
-function preloadImages() {
+function updateProgress(count, max) {
+  const percent = Math.min(100, Math.round((count / max) * 100));
+  if (progressBar) progressBar.style.width = `${percent}%`;
+  if (progressText) progressText.textContent = `${percent}%`;
+}
+
+// Preload critical initial hero frames
+function loadCriticalFrames() {
   return new Promise((resolve) => {
-    for (let i = 0; i < TOTAL_FRAMES; i++) {
+    let criticalLoaded = 0;
+    for (let i = 0; i < CRITICAL_FRAMES; i++) {
       const img = new Image();
       img.src = getFrameFilename(i);
+      images[i] = img;
 
-      img.onload = () => {
+      const onComplete = () => {
+        criticalLoaded++;
         loadedCount++;
-        updateProgress();
-        if (loadedCount === TOTAL_FRAMES) {
+        updateProgress(criticalLoaded, CRITICAL_FRAMES);
+        if (criticalLoaded === CRITICAL_FRAMES) {
           resolve();
         }
       };
 
-      img.onerror = () => {
-        loadedCount++;
-        updateProgress();
-        if (loadedCount === TOTAL_FRAMES) {
-          resolve();
-        }
-      };
-
-      images.push(img);
+      img.onload = onComplete;
+      img.onerror = onComplete;
     }
   });
 }
 
-function updateProgress() {
-  const percent = Math.round((loadedCount / TOTAL_FRAMES) * 100);
-  progressBar.style.width = `${percent}%`;
-  progressText.textContent = `${percent}%`;
+// Progressive background loader for remaining animation frames
+function loadRemainingFrames() {
+  let index = CRITICAL_FRAMES;
+  function loadNextBatch() {
+    if (index >= TOTAL_FRAMES) return;
+    const batchSize = 10;
+    const end = Math.min(TOTAL_FRAMES, index + batchSize);
+    for (let i = index; i < end; i++) {
+      if (!images[i]) {
+        const img = new Image();
+        img.src = getFrameFilename(i);
+        img.onload = () => { loadedCount++; };
+        img.onerror = () => { loadedCount++; };
+        images[i] = img;
+      }
+    }
+    index = end;
+    if (index < TOTAL_FRAMES) {
+      setTimeout(loadNextBatch, 50);
+    }
+  }
+  setTimeout(loadNextBatch, 100);
+}
+
+// Safely retrieve loaded frame or nearest fallback frame
+function getLoadedFrame(index) {
+  if (images[index] && images[index].complete && images[index].naturalWidth > 0) {
+    return images[index];
+  }
+  for (let offset = 1; offset < TOTAL_FRAMES; offset++) {
+    const prev = index - offset;
+    if (prev >= 0 && images[prev] && images[prev].complete && images[prev].naturalWidth > 0) {
+      return images[prev];
+    }
+    const next = index + offset;
+    if (next < TOTAL_FRAMES && images[next] && images[next].complete && images[next].naturalWidth > 0) {
+      return images[next];
+    }
+  }
+  return null;
 }
 
 // Setup Canvas Sizing with HiDPI / Retina Support
 function resizeCanvas() {
+  if (!canvas || !ctx) return;
   const dpr = window.devicePixelRatio || 1;
   canvas.width = Math.floor(window.innerWidth * dpr);
   canvas.height = Math.floor(window.innerHeight * dpr);
@@ -61,24 +100,21 @@ function resizeCanvas() {
   render(true);
 }
 
-// Draw Image preserving aspect ratio (Cover mode centered for optimal face visibility)
+// Draw Image preserving aspect ratio
 function drawImageCover(img) {
-  if (!img || !img.complete || img.naturalWidth === 0) return;
+  if (!img || !img.complete || img.naturalWidth === 0 || !ctx) return;
 
   const canvasWidth = window.innerWidth;
   const canvasHeight = window.innerHeight;
   const imgWidth = img.naturalWidth;
   const imgHeight = img.naturalHeight;
 
-  // Calculate scale for full canvas cover
   const scale = Math.max(canvasWidth / imgWidth, canvasHeight / imgHeight);
   const width = imgWidth * scale;
   const height = imgHeight * scale;
 
-  // Center subject in canvas with optimal framing
   let x = (canvasWidth - width) / 2;
   if (width > canvasWidth) {
-    // Slightly adjust horizontal center so the portrait features are prominently visible
     x = (canvasWidth - width) * 0.55;
   }
   const y = (canvasHeight - height) / 2;
@@ -88,14 +124,18 @@ function drawImageCover(img) {
 }
 
 function render(force = false) {
+  if (!canvas || !ctx) return;
   const frameIndex = Math.min(
     TOTAL_FRAMES - 1,
     Math.max(0, Math.round(currentFrame))
   );
 
   if (force || frameIndex !== lastRenderedFrame) {
-    drawImageCover(images[frameIndex]);
-    lastRenderedFrame = frameIndex;
+    const frameImg = getLoadedFrame(frameIndex);
+    if (frameImg) {
+      drawImageCover(frameImg);
+      lastRenderedFrame = frameIndex;
+    }
   }
 }
 
@@ -115,7 +155,6 @@ function updateScrollTarget() {
   }
 }
 
-// Smooth Animation Loop using Lerp
 function animationLoop() {
   updateScrollTarget();
 
@@ -129,24 +168,26 @@ function animationLoop() {
   }
 
   render();
-  animationFrameId = requestAnimationFrame(animationLoop);
+  requestAnimationFrame(animationLoop);
 }
 
-// Initialize Application
 async function init() {
-  window.addEventListener('resize', resizeCanvas);
-  window.addEventListener('scroll', updateScrollTarget, { passive: true });
+  if (canvas) {
+    window.addEventListener('resize', resizeCanvas);
+    window.addEventListener('scroll', updateScrollTarget, { passive: true });
+    await loadCriticalFrames();
+  }
 
-  await preloadImages();
+  // Hide preloader instantly once critical hero assets are ready
+  if (loader) {
+    loader.classList.add('hidden');
+  }
 
-  // Hide loading indicator smoothly
-  loader.classList.add('hidden');
-
-  // Initial canvas sizing and first render
-  resizeCanvas();
-
-  // Start smooth animation loop
-  animationLoop();
+  if (canvas) {
+    resizeCanvas();
+    animationLoop();
+    loadRemainingFrames();
+  }
 }
 
 init();
