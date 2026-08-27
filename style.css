@@ -257,11 +257,14 @@ html, body {
   width: 100%;
   max-width: 1760px;
   margin: 0 auto;
-  padding: 140px 64px 80vh;
+  padding: 140px 64px 80px;
   display: flex;
   flex-direction: column;
   gap: 140px;
+  min-height: 100vh;
+  justify-content: space-between;
 }
+
 
 /* Subpage Hero */
 .page-hero {
@@ -943,11 +946,22 @@ html, body {
   color: rgba(255, 255, 255, 0.65);
 }
 
+/* Contact & Footer Section Wrapper */
+.contact-section {
+  width: 100%;
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  position: relative;
+  z-index: 10;
+}
+
 /* Consultation Request Bar */
 .consultation-bar {
   display: flex;
   justify-content: flex-start;
-  margin-bottom: 40px;
+  margin-bottom: 0;
   width: 100%;
 }
 
@@ -1111,7 +1125,7 @@ html, body {
   }
 
   .content-wrapper {
-    padding: 100px 20px 60vh;
+    padding: 100px 20px 48px;
     gap: 90px;
   }
 
