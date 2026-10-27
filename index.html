@@ -6,6 +6,42 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="google-site-verification" content="google487da746eed29dbc">
   <title>Pavan Geesala — AI Designer • Motion Director • Creative Technologist</title>
+  <meta name="description" content="Portfolio of Pavan Geesala — Senior Motion Graphics Designer, AI Video Creator, and Creative Technologist specializing in 3D animation, VFX, and generative AI storytelling.">
+  <link rel="canonical" href="https://pavan-geesala-portfolio-xi.vercel.app/index.html">
+  
+  <!-- Open Graph / Facebook / LinkedIn -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://pavan-geesala-portfolio-xi.vercel.app/index.html">
+  <meta property="og:title" content="Pavan Geesala — AI Designer • Motion Director • Creative Technologist">
+  <meta property="og:description" content="Crafting digital visual products & AI production systems that inspire, connect, and scale modern businesses.">
+  <meta property="og:image" content="https://pavan-geesala-portfolio-xi.vercel.app/assets/images/hariom-pipes-project.webp">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Pavan Geesala — AI Designer • Motion Director • Creative Technologist">
+  <meta name="twitter:description" content="Turning complex engineering, healthcare, and brand concepts into high-impact visual stories.">
+  <meta name="twitter:image" content="https://pavan-geesala-portfolio-xi.vercel.app/assets/images/hariom-pipes-project.webp">
+
+  <!-- Structured Data (JSON-LD) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Pavan Geesala",
+    "jobTitle": "Senior Motion Graphics Designer & Creative Technologist",
+    "url": "https://pavan-geesala-portfolio-xi.vercel.app/index.html",
+    "sameAs": [
+      "https://www.linkedin.com/in/pavan-geesala"
+    ],
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Hyderabad",
+      "addressRegion": "Telangana",
+      "addressCountry": "India"
+    }
+  }
+  </script>
+
   <link rel="stylesheet" href="style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,6 +52,9 @@
 </head>
 
 <body>
+
+  <!-- Accessible Skip Link -->
+  <a href="#main-content" class="skip-to-content">Skip to main content</a>
 
   <!-- Loading Screen -->
   <div id="loader" class="loader-container">
@@ -40,7 +79,15 @@
       <a href="index.html" class="logo">Pavan Geesala</a>
       <span class="logo-badge">AI Studio</span>
     </div>
-    <nav class="nav-links">
+
+    <!-- Accessible Mobile Hamburger Button (BUG-01) -->
+    <button id="mobile-menu-btn" class="mobile-menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="primary-nav">
+      <span class="hamburger-bar"></span>
+      <span class="hamburger-bar"></span>
+      <span class="hamburger-bar"></span>
+    </button>
+
+    <nav id="primary-nav" class="nav-links" aria-label="Primary Navigation">
       <a href="index.html" class="active">Home</a>
       <a href="tech-suite.html">Tech Suite</a>
       <a href="workflow.html">Workflow</a>
@@ -48,15 +95,19 @@
       <a href="projects.html">Projects</a>
       <a href="#about">About</a>
       <a href="#contact">Contact</a>
+      <a href="#contact" class="btn-cta mobile-drawer-cta">
+        Start a project
+        <span class="arrow-icon">→</span>
+      </a>
     </nav>
-    <a href="#contact" class="btn-cta">
+    <a href="#contact" class="btn-cta desktop-cta">
       Start a project
       <span class="arrow-icon">→</span>
     </a>
   </header>
 
-  <!-- Main Scrollable Content Layer -->
-  <div class="content-wrapper">
+  <!-- Semantic Main Landmark -->
+  <main id="main-content" class="content-wrapper">
 
     <!-- 1. Hero Section -->
     <section id="hero" class="hero-section">
@@ -79,6 +130,22 @@
         and brand concepts into high-impact visual stories through 3D Motion, VFX, Generative AI & Automation.
       </p>
 
+      <!-- Primary Action Buttons (Showreel, Start Project, Résumé) -->
+      <div class="hero-actions">
+        <button id="watch-showreel-btn" class="btn-secondary" aria-haspopup="dialog" aria-label="Watch Pavan Geesala Motion & AI Showreel">
+          <svg class="ui-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          Watch Showreel
+        </button>
+        <a href="#contact" class="btn-cta">
+          Start a project
+          <span class="arrow-icon">→</span>
+        </a>
+        <a href="assets/docs/Pavan_Geesala_Resume.pdf" class="btn-secondary" download="Pavan_Geesala_Resume.pdf" aria-label="Download Pavan Geesala Résumé (PDF)">
+          <svg class="ui-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download Résumé
+        </a>
+      </div>
+
       <!-- Specialization Chips -->
       <div class="chips-grid">
         <span class="chip"><svg class="ui-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3L12 3Z"/></svg> Gen AI Storytelling</span>
@@ -89,7 +156,7 @@
       </div>
 
       <!-- Impact Metrics Row -->
-      <div class="metrics-row" style="grid-template-columns: repeat(3, 1fr);">
+      <div class="metrics-row">
         <div class="metric-card">
           <span class="metric-num">5+</span>
           <span class="metric-label">Years Industry Experience</span>
@@ -368,7 +435,7 @@
         <!-- Project 1 -->
         <div class="project-card">
           <div class="project-img-wrap">
-            <img src="assets/images/skyshade-project.webp" alt="Skyshade Daylighting & Tensile Structures" loading="lazy">
+            <img src="assets/images/skyshade-project.webp" alt="Skyshade Daylighting & Tensile Structures" width="600" height="375" loading="lazy">
             <span class="project-cat-pill">Daylighting & Tensile</span>
           </div>
           <div class="project-body">
@@ -381,14 +448,14 @@
           </div>
           <div class="project-footer">
             <span class="footer-label">Case study</span>
-            <span class="footer-action">View project →</span>
+            <a href="projects.html#skyshade" class="footer-action-link" aria-label="View Skyshade case study details">View project →</a>
           </div>
         </div>
 
         <!-- Project 2 -->
         <div class="project-card">
           <div class="project-img-wrap">
-            <img src="assets/images/prowess-soft-project.webp" alt="Prowess Soft Enterprise Systems" loading="lazy">
+            <img src="assets/images/prowess-soft-project.webp" alt="Prowess Soft Enterprise Systems" width="600" height="375" loading="lazy">
             <span class="project-cat-pill">Enterprise Systems</span>
           </div>
           <div class="project-body">
@@ -401,14 +468,14 @@
           </div>
           <div class="project-footer">
             <span class="footer-label">Case study</span>
-            <span class="footer-action">View project →</span>
+            <a href="projects.html#prowess-soft" class="footer-action-link" aria-label="View Prowess Soft case study details">View project →</a>
           </div>
         </div>
 
         <!-- Project 3 -->
         <div class="project-card">
           <div class="project-img-wrap">
-            <img src="assets/images/hariom-pipes-project.webp" alt="Hariom Pipes Pippo & GP Pipes" loading="lazy">
+            <img src="assets/images/hariom-pipes-project.webp" alt="Hariom Pipes Pippo & GP Pipes" width="600" height="375" loading="lazy">
             <span class="project-cat-pill">Industrial Brand</span>
           </div>
           <div class="project-body">
@@ -421,7 +488,7 @@
           </div>
           <div class="project-footer">
             <span class="footer-label">Case study</span>
-            <span class="footer-action">View project →</span>
+            <a href="projects.html#hariom-pipes" class="footer-action-link" aria-label="View Hariom Pipes case study details">View project →</a>
           </div>
         </div>
       </div>
@@ -460,9 +527,9 @@
           <h4 class="footer-heading">SOCIAL</h4>
           <ul class="footer-links">
             <li><a href="https://www.linkedin.com/in/pavan-geesala" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
-            <li><a href="https://behance.net" target="_blank" rel="noopener noreferrer">Behance</a></li>
-            <li><a href="https://instagram.com" target="_blank" rel="noopener noreferrer">Instagram</a></li>
-            <li><a href="https://youtube.com" target="_blank" rel="noopener noreferrer">YouTube</a></li>
+            <li><a href="https://behance.net" target="_blank" rel="noopener noreferrer" aria-label="Pavan Geesala on Behance">Behance</a></li>
+            <li><a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Pavan Geesala on Instagram">Instagram</a></li>
+            <li><a href="https://youtube.com" target="_blank" rel="noopener noreferrer" aria-label="Pavan Geesala on YouTube">YouTube</a></li>
           </ul>
         </div>
 
@@ -479,7 +546,32 @@
       </footer>
     </section>
 
-  </div>
+  </main>
+
+  <!-- Accessible Showreel Modal Dialog (BUG-03) -->
+  <dialog id="showreel-modal" class="app-modal" aria-labelledby="showreel-title">
+    <div class="modal-header">
+      <h2 id="showreel-title" class="modal-title">Pavan Geesala — 2026 Motion & AI Showreel</h2>
+      <button class="modal-close-btn" aria-label="Close Showreel Modal">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-video-container">
+        <video controls preload="metadata" poster="assets/images/hariom-pipes-project.webp">
+          <source src="assets/videos/showreel.mp4" type="video/mp4">
+          Your browser does not support HTML5 video playback.
+        </video>
+        <div class="video-placeholder">
+          <p><strong>Showreel Playback Ready</strong></p>
+          <p style="font-size:13.5px; color:rgba(255,255,255,0.7);">
+            Connect your active video file to <code>assets/videos/showreel.mp4</code> or provide your preferred YouTube/Vimeo embed URL.
+          </p>
+        </div>
+      </div>
+      <p class="modal-desc-text">
+        High-fidelity visual showcase of 3D motion design, architectural daylighting simulations, generative AI pipelines, and commercial post-production.
+      </p>
+    </div>
+  </dialog>
 
   <script src="script.js" defer></script>
 </body>

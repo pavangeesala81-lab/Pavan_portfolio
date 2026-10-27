@@ -1,5 +1,19 @@
-const TOTAL_FRAMES = 240;
-const CRITICAL_FRAMES = 10; // Load initial 10 frames to start instantly
+/**
+ * Pavan Geesala Portfolio — Core JavaScript
+ * Features:
+ * - HiDPI Scroll-Driven Canvas Background (Homepage-optimized)
+ * - Accessible Mobile Hamburger Navigation
+ * - Page Visibility & Reduced-Motion Performance Handling
+ * - Interactive Project Case Study Dialog
+ * - Accessible Showreel Video Modal
+ */
+
+const isHomepage = window.location.pathname.endsWith('index.html') || 
+                   window.location.pathname === '/' || 
+                   window.location.pathname.endsWith('/');
+
+const TOTAL_FRAMES = isHomepage ? 240 : 1;
+const CRITICAL_FRAMES = isHomepage ? 10 : 1;
 const canvas = document.getElementById('hero-canvas');
 const ctx = canvas ? canvas.getContext('2d') : null;
 const loader = document.getElementById('loader');
@@ -11,6 +25,8 @@ let loadedCount = 0;
 let currentFrame = 0;
 let targetFrame = 0;
 let lastRenderedFrame = -1;
+let isTabActive = true;
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 // Generate image filename
 function getFrameFilename(index) {
@@ -48,8 +64,9 @@ function loadCriticalFrames() {
   });
 }
 
-// Progressive background loader for remaining animation frames
+// Progressive background loader for remaining animation frames (homepage only)
 function loadRemainingFrames() {
+  if (!isHomepage) return;
   let index = CRITICAL_FRAMES;
   function loadNextBatch() {
     if (index >= TOTAL_FRAMES) return;
@@ -140,6 +157,7 @@ function render(force = false) {
 }
 
 function updateScrollTarget() {
+  if (!isHomepage || prefersReducedMotion) return;
   const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
   const scrollHeight = Math.max(
     document.body.scrollHeight,
@@ -156,6 +174,8 @@ function updateScrollTarget() {
 }
 
 function animationLoop() {
+  if (!isTabActive || prefersReducedMotion || !isHomepage) return;
+
   updateScrollTarget();
 
   const lerpFactor = 0.12;
@@ -171,10 +191,269 @@ function animationLoop() {
   requestAnimationFrame(animationLoop);
 }
 
+// Page visibility API to pause animation work when tab is inactive
+document.addEventListener('visibilitychange', () => {
+  isTabActive = !document.hidden;
+  if (isTabActive && !prefersReducedMotion && isHomepage) {
+    requestAnimationFrame(animationLoop);
+  }
+});
+
+/* ==========================================================================
+   Mobile Navigation Menu (BUG-01)
+   ========================================================================== */
+function initMobileNav() {
+  const menuBtn = document.getElementById('mobile-menu-btn');
+  const navLinks = document.getElementById('primary-nav');
+
+  if (!menuBtn || !navLinks) return;
+
+  function toggleMenu(expand) {
+    const isCurrentlyExpanded = menuBtn.getAttribute('aria-expanded') === 'true';
+    const nextState = (typeof expand === 'boolean') ? expand : !isCurrentlyExpanded;
+
+    menuBtn.setAttribute('aria-expanded', String(nextState));
+    if (nextState) {
+      navLinks.classList.add('nav-open');
+    } else {
+      navLinks.classList.remove('nav-open');
+    }
+  }
+
+  menuBtn.addEventListener('click', () => {
+    toggleMenu();
+  });
+
+  // Close when clicking any nav item
+  navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      toggleMenu(false);
+    });
+  });
+
+  // Close on Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && menuBtn.getAttribute('aria-expanded') === 'true') {
+      toggleMenu(false);
+      menuBtn.focus();
+    }
+  });
+
+  // Close when clicking outside navbar
+  document.addEventListener('click', (e) => {
+    const navbar = document.querySelector('.navbar');
+    if (navbar && !navbar.contains(e.target) && menuBtn.getAttribute('aria-expanded') === 'true') {
+      toggleMenu(false);
+    }
+  });
+}
+
+/* ==========================================================================
+   Project Case Studies Modal (BUG-02)
+   ========================================================================== */
+const projectData = {
+  'skyshade': {
+    title: 'Skyshade Daylighting & Tensile Structures',
+    category: 'Daylighting & Architectural Tensile',
+    image: 'assets/images/skyshade-project.webp',
+    overview: 'Pioneering architectural daylighting systems and tensile engineering. Showcases Norikool natural sunlight harvesters, Lightpipe technology, and custom canopy fabric architectures.',
+    role: 'Produced end-to-end 3D architectural visual explainers, optical light-path ray-tracing simulations, and tensile membrane animations for global infrastructure clients.',
+    tools: ['Blender 3D', 'After Effects', 'DaVinci Resolve', 'CAD Pipeline'],
+    deliverables: ['Full Architectural Visual Explainer', 'Light Distribution Motion Analysis', 'Engineering Brand Commercials']
+  },
+  'prowess-soft': {
+    title: 'Prowess Soft Enterprise Systems',
+    category: 'Enterprise Systems & Workflow Automation',
+    image: 'assets/images/prowess-soft-project.webp',
+    overview: 'High-performance enterprise workflow automation, real-time business intelligence dashboards, and creative management systems for modern digital teams.',
+    role: 'Directed product UI motion design, simulated real-time data flow animations, dashboard telemetry visualization, and brand marketing product explainers.',
+    tools: ['After Effects', 'Premiere Pro', 'Figma', 'Illustrator'],
+    deliverables: ['Enterprise Platform Feature Walkthrough', 'Data-Flow Motion Graphics', 'B2B Product Video Suite']
+  },
+  'hariom-pipes': {
+    title: 'Hariom Pipes Pippo & GP Pipes',
+    category: 'Industrial Brand & Manufacturing',
+    image: 'assets/images/hariom-pipes-project.webp',
+    overview: 'High-impact cinematic industrial commercial visual campaign showcasing premium Pippo and GP Pipes steel products, manufacturing strength, and durability.',
+    role: 'Lead 3D Artist and Motion Director overseeing photorealistic metal shaders, industrial plant cinematics, slow-motion stress test simulations, and color grading.',
+    tools: ['Blender', 'After Effects', 'DaVinci Resolve', 'Photoshop'],
+    deliverables: ['Broadcast Television Commercial (TVC)', '3D Product Visualization', 'High-Impact Brand Identity Reels']
+  },
+  'akshara-consultants': {
+    title: 'Akshara Consultants Advisory',
+    category: 'Corporate Consulting & Process Transformation',
+    image: 'assets/images/akshara-consultants-project.webp',
+    overview: 'Strategic corporate advisory explainer series translating complex management methodologies, governance models, and corporate transformations into intuitive visual stories.',
+    role: 'Crafted structured infographic motion systems, executive presentation visuals, and branded corporate storytelling assets for C-suite decision-makers.',
+    tools: ['After Effects', 'Illustrator', 'Premiere Pro'],
+    deliverables: ['Corporate Methodology Explainer', 'Kinetic Typography Presentation', 'Executive Digital Collateral']
+  },
+  'real-estate-ai': {
+    title: 'Real Estate AI Video Works',
+    category: 'Architectural AI & Generative Visuals',
+    image: 'assets/images/real-estate-ai-project.webp',
+    overview: 'Cinematic generative AI visual production and virtual walkthroughs for luxury architectural developments, combining AI diffusion synthesis with 3D compositing.',
+    role: 'Developed customized generative AI pipelines, prompt-to-video style transfer, camera trajectory motion smoothing, and photorealistic architectural environmental renders.',
+    tools: ['Midjourney', 'Runway Gen-2/3', 'Stable Diffusion', 'After Effects', 'Topaz Video AI'],
+    deliverables: ['Luxury Property Cinematic Trailers', 'Generative Architectural Flythroughs', 'Hyper-Realistic Mood Films']
+  },
+  'ekluvya': {
+    title: 'Ekluvya Creative Education & Motion',
+    category: 'Creative Education & Visual Storytelling',
+    image: 'assets/images/ekluvya-project.webp',
+    overview: 'Comprehensive digital visual production, motion design curriculum, and branded social assets connecting creative education with nationwide digital learners.',
+    role: 'Headed visual production, storyboarding, dynamic 2D/3D character and geometric motion design, and high-engagement social media campaigns across YouTube and Instagram.',
+    tools: ['After Effects', 'Premiere Pro', 'Photoshop', 'Illustrator'],
+    deliverables: ['Educational Motion Curriculum', 'Social Media Motion Series', 'Brand Identity & Motion Guidelines']
+  }
+};
+
+function initProjectModals() {
+  const modal = document.getElementById('project-modal');
+  if (!modal) return;
+
+  const closeBtn = modal.querySelector('.modal-close-btn');
+  const modalTitle = document.getElementById('modal-title');
+  const modalBadge = document.getElementById('modal-badge');
+  const modalImg = document.getElementById('modal-img');
+  const modalOverview = document.getElementById('modal-overview');
+  const modalRole = document.getElementById('modal-role');
+  const modalTools = document.getElementById('modal-tools');
+  const modalDeliverables = document.getElementById('modal-deliverables');
+
+  function openProject(projectId) {
+    const data = projectData[projectId];
+    if (!data) return;
+
+    if (modalTitle) modalTitle.textContent = data.title;
+    if (modalBadge) modalBadge.textContent = data.category;
+    if (modalImg) {
+      modalImg.src = data.image;
+      modalImg.alt = data.title;
+    }
+    if (modalOverview) modalOverview.textContent = data.overview;
+    if (modalRole) modalRole.textContent = data.role;
+
+    if (modalTools) {
+      modalTools.innerHTML = '';
+      data.tools.forEach(tool => {
+        const span = document.createElement('span');
+        span.textContent = tool;
+        modalTools.appendChild(span);
+      });
+    }
+
+    if (modalDeliverables) {
+      modalDeliverables.innerHTML = '';
+      data.deliverables.forEach(item => {
+        const span = document.createElement('span');
+        span.textContent = item;
+        modalDeliverables.appendChild(span);
+      });
+    }
+
+    if (typeof modal.showModal === 'function') {
+      modal.showModal();
+    } else {
+      modal.setAttribute('open', '');
+    }
+  }
+
+  // Attach click listeners to all project action triggers
+  document.querySelectorAll('[data-project]').forEach(trigger => {
+    trigger.addEventListener('click', (e) => {
+      e.preventDefault();
+      const projectId = trigger.getAttribute('data-project');
+      openProject(projectId);
+    });
+  });
+
+  if (closeBtn) {
+    closeBtn.addEventListener('click', () => {
+      if (typeof modal.close === 'function') {
+        modal.close();
+      } else {
+        modal.removeAttribute('open');
+      }
+    });
+  }
+
+  // Close when clicking modal backdrop
+  modal.addEventListener('click', (e) => {
+    const rect = modal.getBoundingClientRect();
+    const isInDialog = (rect.top <= e.clientY && e.clientY <= rect.top + rect.height &&
+      rect.left <= e.clientX && e.clientX <= rect.left + rect.width);
+    if (!isInDialog) {
+      modal.close();
+    }
+  });
+
+  // Check URL hash for direct project link
+  const hash = window.location.hash.replace('#', '');
+  if (hash && projectData[hash]) {
+    setTimeout(() => { openProject(hash); }, 400);
+  }
+}
+
+/* ==========================================================================
+   Showreel Video Modal (BUG-03)
+   ========================================================================== */
+function initShowreelModal() {
+  const showreelBtn = document.getElementById('watch-showreel-btn');
+  const showreelModal = document.getElementById('showreel-modal');
+  if (!showreelModal) return;
+
+  const closeBtn = showreelModal.querySelector('.modal-close-btn');
+  const video = showreelModal.querySelector('video');
+
+  if (showreelBtn) {
+    showreelBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (typeof showreelModal.showModal === 'function') {
+        showreelModal.showModal();
+        if (video) video.play().catch(() => {});
+      }
+    });
+  }
+
+  function closeShowreel() {
+    if (video) video.pause();
+    if (typeof showreelModal.close === 'function') {
+      showreelModal.close();
+    }
+  }
+
+  if (closeBtn) {
+    closeBtn.addEventListener('click', closeShowreel);
+  }
+
+  showreelModal.addEventListener('click', (e) => {
+    const rect = showreelModal.getBoundingClientRect();
+    const isInDialog = (rect.top <= e.clientY && e.clientY <= rect.top + rect.height &&
+      rect.left <= e.clientX && e.clientX <= rect.left + rect.width);
+    if (!isInDialog) {
+      closeShowreel();
+    }
+  });
+
+  showreelModal.addEventListener('close', () => {
+    if (video) video.pause();
+  });
+}
+
+/* ==========================================================================
+   Initialization Lifecycle
+   ========================================================================== */
 async function init() {
+  initMobileNav();
+  initProjectModals();
+  initShowreelModal();
+
   if (canvas) {
     window.addEventListener('resize', resizeCanvas);
-    window.addEventListener('scroll', updateScrollTarget, { passive: true });
+    if (isHomepage && !prefersReducedMotion) {
+      window.addEventListener('scroll', updateScrollTarget, { passive: true });
+    }
     await loadCriticalFrames();
   }
 
@@ -185,9 +464,19 @@ async function init() {
 
   if (canvas) {
     resizeCanvas();
-    animationLoop();
-    loadRemainingFrames();
+    if (isHomepage && !prefersReducedMotion) {
+      animationLoop();
+      loadRemainingFrames();
+    } else {
+      // On subpages or reduced motion, render the single crisp background frame
+      render(true);
+    }
   }
 }
 
-init();
+// Start application
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', init);
+} else {
+  init();
+}

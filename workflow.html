@@ -4,12 +4,31 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Production Pipeline & Workflow — Pavan Geesala</title>
+  <meta name="description" content="Discover the 12-stage AI & motion design production pipeline engineered by Pavan Geesala — from conceptual prompting to final color grading and multi-format delivery.">
+  <link rel="canonical" href="https://pavan-geesala-portfolio-xi.vercel.app/workflow.html">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://pavan-geesala-portfolio-xi.vercel.app/workflow.html">
+  <meta property="og:title" content="Production Pipeline & Workflow — Pavan Geesala">
+  <meta property="og:description" content="End-to-end modern creative production pipeline fusing 3D animation, VFX, and generative AI automation.">
+  <meta property="og:image" content="https://pavan-geesala-portfolio-xi.vercel.app/assets/images/hariom-pipes-project.webp">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Production Pipeline & Workflow — Pavan Geesala">
+  <meta name="twitter:description" content="12-stage AI & motion design production pipeline.">
+  <meta name="twitter:image" content="https://pavan-geesala-portfolio-xi.vercel.app/assets/images/hariom-pipes-project.webp">
+
   <link rel="stylesheet" href="style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 </head>
 <body>
+
+  <!-- Accessible Skip Link -->
+  <a href="#main-content" class="skip-to-content">Skip to main content</a>
 
   <!-- Loading Screen -->
   <div id="loader" class="loader-container">
@@ -34,22 +53,35 @@
       <a href="index.html" class="logo">Pavan Geesala</a>
       <span class="logo-badge">AI Studio</span>
     </div>
-    <nav class="nav-links">
+
+    <!-- Accessible Mobile Hamburger Button (BUG-01) -->
+    <button id="mobile-menu-btn" class="mobile-menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="primary-nav">
+      <span class="hamburger-bar"></span>
+      <span class="hamburger-bar"></span>
+      <span class="hamburger-bar"></span>
+    </button>
+
+    <nav id="primary-nav" class="nav-links" aria-label="Primary Navigation">
       <a href="index.html">Home</a>
       <a href="tech-suite.html">Tech Suite</a>
       <a href="workflow.html" class="active">Workflow</a>
       <a href="experience.html">Experience</a>
       <a href="projects.html">Projects</a>
+      <a href="index.html#about">About</a>
       <a href="#contact">Contact</a>
+      <a href="#contact" class="btn-cta mobile-drawer-cta">
+        Start a project
+        <span class="arrow-icon">→</span>
+      </a>
     </nav>
-    <a href="#contact" class="btn-cta">
+    <a href="#contact" class="btn-cta desktop-cta">
       Start a project
       <span class="arrow-icon">→</span>
     </a>
   </header>
 
-  <!-- Main Scrollable Content Layer -->
-  <div class="content-wrapper">
+  <!-- Semantic Main Landmark Layer -->
+  <main id="main-content" class="content-wrapper">
     
     <section class="page-hero">
       <span class="section-tag">End-to-end production pipeline</span>
@@ -132,6 +164,7 @@
             <li><a href="workflow.html">Workflow</a></li>
             <li><a href="tech-suite.html">Tech Suite</a></li>
             <li><a href="experience.html">Experience</a></li>
+            <li><a href="index.html#about">About</a></li>
           </ul>
         </div>
 
@@ -139,9 +172,9 @@
           <h4 class="footer-heading">SOCIAL</h4>
           <ul class="footer-links">
             <li><a href="https://www.linkedin.com/in/pavan-geesala" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
-            <li><a href="https://behance.net" target="_blank" rel="noopener noreferrer">Behance</a></li>
-            <li><a href="https://instagram.com" target="_blank" rel="noopener noreferrer">Instagram</a></li>
-            <li><a href="https://youtube.com" target="_blank" rel="noopener noreferrer">YouTube</a></li>
+            <li><a href="https://behance.net" target="_blank" rel="noopener noreferrer" aria-label="Pavan Geesala on Behance">Behance</a></li>
+            <li><a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Pavan Geesala on Instagram">Instagram</a></li>
+            <li><a href="https://youtube.com" target="_blank" rel="noopener noreferrer" aria-label="Pavan Geesala on YouTube">YouTube</a></li>
           </ul>
         </div>
 
@@ -153,12 +186,12 @@
 
         <div class="footer-bottom">
           <span>© 2026 Pavan Geesala. All rights reserved.</span>
-          <a href="#hero" class="back-to-top">Back to top ↑</a>
+          <a href="#main-content" class="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;">Back to top ↑</a>
         </div>
       </footer>
     </section>
 
-  </div>
+  </main>
 
   <script src="script.js" defer></script>
 </body>
